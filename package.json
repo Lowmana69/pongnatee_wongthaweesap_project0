@@ -1,0 +1,36 @@
+{
+  "name": "pongnatee_wongthaweesap_p0",
+  "version": "1.0.0",
+  "description": "Project 0 - Revature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lowmana69/Pongnatee_Wongthaweesap_P0.git"
+  },
+  "author": "Lowmana69",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lowmana69/Pongnatee_Wongthaweesap_P0/issues"
+  },
+  "homepage": "https://github.com/Lowmana69/Pongnatee_Wongthaweesap_P0#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "@types/pg": "^7.14.3",
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3",
+    "ts-jest": "^25.5.0",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
+  }
+}
