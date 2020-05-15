@@ -15,7 +15,13 @@ export const usersRouter = express.Router();
 */
 
 usersRouter.get('', (request, response, next) => {
-
+    usersService.getAllUsers().then(users => {
+        response.json(users);
+        next();
+    }).catch (error => {
+        console.log(error);
+        response.sendStatus(500);
+    });
 });
 
 /* Read / Retieve A Single User By ID */
@@ -26,6 +32,7 @@ usersRouter.get('', (request, response, next) => {
 */
 
 usersRouter.get('/:id', (request, response, next) => {
+    const id = request.params.id;
     
 });
 

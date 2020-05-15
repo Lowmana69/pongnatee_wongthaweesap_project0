@@ -1,6 +1,6 @@
 /* Export Rating Class */
 
-export class Rating {
+export class Record {
     id: number;
     category: number;
     handler: number;
@@ -12,15 +12,15 @@ export class Rating {
      * database gives us
      */
 
-    static from(obj: RatingRow): Rating {
-        const rating = new Rating(
+    static from(obj: RecordRow): Record {
+        const record = new Record(
             obj.id,
             obj.category,
             obj.handler,
             obj.totalRatings,
             obj.recommendation
         );
-        return rating;
+        return record;
     }
 
     constructor(
@@ -40,7 +40,7 @@ export class Rating {
 
 /* Export Rating Interface */
 
-export interface RatingRow {
+export interface RecordRow {
     id: number;
     category: number;
     handler: number;

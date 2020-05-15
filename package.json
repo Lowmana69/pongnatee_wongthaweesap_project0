@@ -4,7 +4,8 @@
   "description": "Project 0 - Revature",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose && jest --watchAll && jest --coverage",
+    "start": "nodemon ./src/app.ts"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,11 @@
     "pg": "^8.1.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
     "@types/pg": "^7.14.3",
+    "@types/supertest": "^2.0.9",
     "jest": "^26.0.1",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2",

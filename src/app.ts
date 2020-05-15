@@ -5,7 +5,7 @@ import { db } from './daos/db';
 import { usersRouter } from './routes/users-router';
 import { moviesRouter } from './routes/movies-router';
 import { booksRouter } from './routes/books-router';
-import { ratingsRouter } from './routes/ratings-router';
+import { recordsRouter } from './routes/records-router';
 
 /* Initialize Express */
 
@@ -26,7 +26,7 @@ app.use(express.JSON());
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
 app.use('/books', booksRouter);
-app.use('/ratings', ratingsRouter);
+app.use('/records', ratingsRouter);
 
 /* Initialize Port to Listen */
 
