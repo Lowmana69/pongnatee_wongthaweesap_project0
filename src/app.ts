@@ -1,7 +1,8 @@
 /* Import Modules*/
 
+require('dotenv').config();
 import express from 'express';
-import { db } from './daos/db';
+import { db } from './daos/database';
 import { usersRouter } from './routes/users-router';
 import { moviesRouter } from './routes/movies-router';
 import { booksRouter } from './routes/books-router';
@@ -19,7 +20,7 @@ app.set('PORT', PORT);
 
 /* Register Middleware */
 
-app.use(express.JSON());
+app.use(express.json());
 
 /* Register Routes Middleware */
 
