@@ -15,7 +15,14 @@ export const recordsRouter = express.Router();
 */
 
 recordsRouter.get('', (request, response, next) => {
-
+    recordsService.getAllRecords()
+        .then(records => {
+            response.set('content-type', 'application/json');
+            response.json(records);
+            next();
+        }).catch(error => {
+            response.sendStatus(500);
+        });
 });
 
 /* Read / Retrieve A Single Record By ID */
@@ -26,7 +33,18 @@ recordsRouter.get('', (request, response, next) => {
 */
 
 recordsRouter.get('/:id', (request, response, next) => {
-    
+    const id = +request.params.id;
+    recordsService.getRecordById(id)
+        .then(record => {
+            if (!record) {
+                response.sendStatus(404);
+            } else {
+                response.json(record)
+            }
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        })
 });
 
 /* Read / Retrieve All Records By Category */
@@ -37,7 +55,18 @@ recordsRouter.get('/:id', (request, response, next) => {
 */
 
 recordsRouter.get('/:category', (request, response, next) => {
-
+    const category = +request.params.category;
+    recordsService.getRecordsByCategory(category)
+        .then(category => {
+            if (!category) {
+                response.sendStatus(404);
+            } else {
+                response.json(category);
+            }
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        })
 });
 
 /* Read / Retrieve A Record By Number of Ratings */
@@ -47,8 +76,19 @@ recordsRouter.get('/:category', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-recordsRouter.get('????', (request, response, next) => {
-    
+recordsRouter.get('/:recommendations', (request, response, next) => {
+    const recommendation = +request.params.recommendation;
+    recordsService.getRecordsByNumbers(recommendation)
+        .then(recommendation => {
+            if (!recommendation) {
+                response.sendStatus(404);
+            } else {
+                response.json(recommendation);
+            }
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        })
 });
 
 /* Read / Retrieve All Records By Handler Name */
@@ -58,8 +98,19 @@ recordsRouter.get('????', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-recordsRouter.get('/:handlers', (request, response, next) => {
-    
+recordsRouter.get('/:handler', (request, response, next) => {
+    const handler = +request.params.handler;
+    recordsService.getRecordsByUser(handler)
+        .then(handler => {ß
+            if (!handler) {
+                response.sendStatus(404);
+            } else {
+                response.json(handler);
+            }
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        })
 });
 
 /* Create / Post A New Record To The Database */
@@ -71,11 +122,31 @@ recordsRouter.get('/:handlers', (request, response, next) => {
 */
 
 recordsRouter.post('', (request, response, next) => {
-    
+    const record = request.body;
+    recordsService.createNewRecord(record)
+        .then(newRecord => {
+            response.status(201);
+            response.json(newRecord);
+            next();
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        });
 });
 
 /* Update (Partial) / Patch A Current Record */
 
 recordsRouter.patch('', (request, response, next) => {
-    
+    const record = request.body;
+    recordsService.patchRecord(record)
+        .then(updatedRecord => {
+            if () {
+                response.json(updatedRecord);
+            } else {
+                response.sendStatus(404);
+            }
+        }).catch(error => {
+            response.sendStatus(500);
+            next();
+        });
 });

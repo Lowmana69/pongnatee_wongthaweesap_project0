@@ -16,31 +16,49 @@ import { User, UserRow } from '../models/User';
 
 /* Read / Retrieve All Users From The Database */
 
-export function getAllUsers {
+export function getAllUsers(): Promise<User[]> {
     const sql = '';
+    return db.query<UserRow>(sql, [])
+        .then(result => {
+            const rows: UserRow[]= result.rows;
+            const user: User[] = rows.map(row => User.from(row));
+            return user; 
+        });
 }
 
 /* Read / Retrieve A Single User By ID */
 
-export function getUserById {
+export function getUserById(id: number): Promise<User> {
     const sql = '';
+    return db.query<UserRow> (sql, [id])
+        .then(result => result.rows.map(row => User.from(row))[0]);
 }
 
 /* Read / Retrivve A User(s) By Number of Ratings */
 
-export function getUserByRatings {
+export function getUserByRatings(totalratings: number): Promise<User> {
     const sql = '';
+    return db.query<UserRow> (sql, [totalratings])
+        .then(result => result.rows.map(row => User.from(row))[0]);
 }
 
 /* Create / Post A New User To The Database */
 
-export function createNewUser {
+export function createNewUser(user: User): Promise<User> {
     const sql = '';
+    const params = [user.fullName, user.handler,
+        user.totalRatings];
+    return db.query<UserRow> (sql, params)
+        .then(result => result.rows.map(row => User.from(row))[0]);
 }
 
 /* Update (Partial) / Patch A Current User */
 
-export function patchUser {
+export function patchUser(user: User): Promise<User> {
     const sql = '';
+    const params = [user.fullName, user.handler, 
+            user.totalRatings];
+    return db.query<UserRow> (sql, params)
+        .then(result => result.rows.map(row => User.from(row))[0]);
 }
 

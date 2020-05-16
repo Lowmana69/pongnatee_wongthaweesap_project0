@@ -17,20 +17,55 @@ export function getMovieById (id: number): Promise<Movie> {
 
 /* Read / Retrieve Movies By Genre */
 
-export function getMovieByGenre (genre: string): Promise<Movie> {}
+export function getMovieByGenre (genre: number): Promise<Movie> {
+    return moviesDao.getMovieByGenre(genre);
+}
 
 /* Read / Retrieve Moives By First Letter Of Title */
 
-export function getMovieByFirstLetter (title: string): Promise<Movie> {}
+export function getMovieByFirstLetter (title: string): Promise<Movie> {
+    return moviesDao.getMovieByFirstLetter(title);
+}
 
 /* Read / Retrieve Movies By Year Release */
 
-export function getMovieByYear (year: number): Promise<Movie> {}
+export function getMovieByYear (bydecade: number): Promise<Movie> {
+    return moviesDao.getMovieByYear(bydecade);
+}
 
 /* Create / Post A New Movie To The Database */
 
-export function createNewMovie (user: any): Promise<Movie> {}
+export function createNewMovie (movie: any): Promise<Movie> {
+    const newMovie = new Movie(
+        undefined, movie.title, movie.yearRelease,
+        movie.genre, movie.totalRatings, 
+        movie.currentStatus, movie.isAvailable
+    );
+
+    const params = (movie.title && movie.yearRelease &&
+        movie.genre && movie.totalRatings && 
+        movie.currentStatus && movie.isAvailable);
+    
+    if (params) {
+        return moviesDao.createNewmovie(newMovie);
+    } else (
+        return new Promise((resolve, reject) => reject(422));
+    )
+}
 
 /* Update (Partial) A Single Movie From THe Database s*/
 
-export function patchMovie (input: any): Promise<Movie> {}
+export function patchMovie (input: any): Promise<Movie> {
+    const movie = new Movie (
+        input.id, input.title,
+        input.author, input.genre,
+        input.totalRatings, input.isAvailable,
+        input.currentStatus
+    );
+
+    if (!movie.id) {
+        throw new Error('400');
+    }
+
+    return moviesDao.patchmovie(movie);
+}

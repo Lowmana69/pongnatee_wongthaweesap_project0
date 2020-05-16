@@ -5,7 +5,6 @@ export class User {
     fullName:               string;
     handler:                string;
     totalRatings:           number;
-    currentlyBorrowing:     number;
 
     /**
      * Static function for creating a Person instance from the structure the
@@ -17,8 +16,7 @@ export class User {
             obj.id,
             obj.fullName,
             obj.handler,
-            obj.totalRatings,
-            obj.currentlyBorrowing
+            obj.totalRatings
         );
         return user;
     }
@@ -28,13 +26,12 @@ export class User {
     fullName: string;
     handler: string;
     totalRatings: number;
-    currentlyBorrowing: number;
+
     ) {
         this.id = id;
         this.fullName = fullName;
         this.handler = handler;
         this.totalRatings = totalRatings;
-        this.currentlyBorrowing = currentlyBorrowing;
     }
 }
 
@@ -45,5 +42,4 @@ export interface UserRow {
     fullName:               string;
     handler:                string;
     totalRatings:           number;
-    currentlyBorrowing:     number;
 }

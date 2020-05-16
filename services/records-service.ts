@@ -17,20 +17,54 @@ export function getRecordById (id: number): Promise<Record> {
 
 /* Read / Retrieve All Records By Category */
 
-export function getRecordsByCategory (category: string): Promise<Record> {}
+export function getRecordsByCategory (category: number): Promise<Record> {
+    return recordsDao.getRecordByCategory(category);
+}
 
 /* Read / Retrieve Records By Total Numbers */
 
-export function getRatingsByNumbers (numbers: number): Promise<Record> {}
+export function getRatingsByNumbers (totalratings: number): Promise<Record> {
+    return recordsDao.getRecordsByNumbers(totalratings);
+}
 
 /* Read / Retrieve All Records By A Single User */
 
-export function getRecordsByUser (handler: string): Promise<Record> {}
+export function getRecordsByUser (handler: number): Promise<Record> {
+    return recordsDao.getRecordsByUser(handler);
+}
 
  /* Create / Post A New Record To The Database */
 
-export function createNewRecord (rating: any): Promise<Record> {}
+export function createNewRecord (rating: any): Promise<Record> {
+    const newRecord = new Record (
+        undefined, record.category,
+        record.handler, record.totalRatings,
+        record.recommendation
+    );
+    
+    const params = [record.category &&
+        record.handler && record.totalRatings &&
+        record.recommendation];
+
+    if (params) {
+        return recordsDao.createNewRecord(newRecord);
+    } else {
+        return new Promise((resolve, reject) => reject(422));
+    }
+}
 
 /* Update (Partial) / Patch A Current Record From The Database */
 
-export function patchRecord (input: any): Promise<Record> {}
+export function patchRecord (input: any): Promise<Record> {
+    const record = new Record (
+        input.id, input.category,
+        input.handler, input.recommendation,
+        input.totalRatings
+    );
+
+    if (!record.id) {
+        throw new Error('400');
+    }
+
+    return recordsDao.patchRecord(record);
+}
