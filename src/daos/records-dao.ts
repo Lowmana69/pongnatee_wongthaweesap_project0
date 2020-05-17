@@ -1,6 +1,6 @@
 /* Import Modules */
 
-import { db } from './database';
+import { db } from '../daos/database';
 import { Record, RecordRow } from '../models/Record';
 
 /**

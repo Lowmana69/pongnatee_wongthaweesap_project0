@@ -3,10 +3,10 @@
 require('dotenv').config();
 import express from 'express';
 import { db } from './daos/database';
-import { usersRouter } from './routes/users-router';
-import { moviesRouter } from './routes/movies-router';
-import { booksRouter } from './routes/books-router';
-import { recordsRouter } from './routes/records-router';
+import { usersRouter } from '../src/routers/users-router';
+import { moviesRouter } from '../src/routers/movies-router';
+import { booksRouter } from '../src/routers/books-router';
+import { recordsRouter } from '../src/routers/records-router';
 
 /* Initialize Express */
 
