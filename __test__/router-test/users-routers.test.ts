@@ -24,7 +24,22 @@ app.use('/users', usersRouter);
 
 /* getAllUsers Function */
 
-describe('', () => {
+describe(`'GET' Method /users`, () => {
+    test(`'GET' request should return normally with a 200 Status Code`, async () => {
+        mockUserService.getAllUsers
+            .mockImplementation(async () => []);
+        awit request(app)
+            .get('/users')
+            .expect(200)
+            .expect('content-type', 'application/json; charset=utf-8');
+    });
+    test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
+        mockUserService.getAllUsers
+            .mockImplementation(async () => []);
+        awit request(app)
+            .get('/users')
+            .expect(200);
+    });
     test('should ', () => {
         expect().toBeDefined();
     });
@@ -41,7 +56,29 @@ describe('', () => {
 
 /* getUserByID Function */
 
-describe('', () => {
+describe('`GET` Method /users/id', () => {
+    test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
+        mockUserService.getUserByID
+            .mockImplementation(async () => ({}));
+        await request(app)
+            .get('/users/1')
+            .expect(200)
+            .expect('content-type', 'application/json; charset=utf-8');
+    });
+    test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
+        mockUserService.getUserByID
+            .mockImplementation(async () => ({}));
+        await request(app)
+            .get('/users/465')
+            .expect(404);
+    });
+    test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
+        mockUserService.getUserByID
+            .mockImplementation(async () => ({}));
+        await request(app)
+            .get('/users/undefined')
+            .expect(500);
+    });
     test('should ', () => {
         expect().toBeDefined();
     });
@@ -75,7 +112,37 @@ describe('', () => {
 
 /* createNewUser Function */
 
-describe('', () => {
+describe(`'POST' Method /users`, () => {
+    test(`'POST' should return a 201 Status Code for Successful Creation of Book`, async () => {
+        mockUserService.createNewUser
+            .mockImplementation(async () => ({}));
+        
+        const newUser = {
+            fullName: 'Gandalf Stormcrow',
+            handler: 'GandalfTheWhite',
+            totalRatings: 0
+        };
+
+        await request(app)
+            .post('/users')
+            .send(newUser)
+            .expect(201)
+            .expect('content-type', 'application.json; charset=utf-8');
+    });
+    test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
+        mockBookService.createNewUser
+            .mockImplementation(async () => ({}));
+        
+        const newUser = {
+            fullName: 'Gandalf Stormcrow',
+            handler: 1
+        };
+
+        await request(app)
+            .post('/users')
+            .send(newUser)
+            .expect(500);
+    });
     test('should ', () => {
         expect().toBeDefined();
     });
