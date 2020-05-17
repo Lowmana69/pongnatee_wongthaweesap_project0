@@ -2,8 +2,8 @@
 
 import express from 'express';
 import request from 'supertest';
-import * as usersService from '../../src/services/users-services';
-import { usersRouter } from '../../src/rputers/users-router';
+import * as usersService from '../../src/services/users-service';
+import { usersRouter } from '../../src/routers/users-router';
 
 /*  */
 
@@ -28,6 +28,7 @@ describe(`'GET' Method /users`, () => {
     test(`'GET' request should return normally with a 200 Status Code`, async () => {
         mockUserService.getAllUsers
             .mockImplementation(async () => []);
+
         awit request(app)
             .get('/users')
             .expect(200)
@@ -36,21 +37,10 @@ describe(`'GET' Method /users`, () => {
     test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
         mockUserService.getAllUsers
             .mockImplementation(async () => []);
+
         awit request(app)
             .get('/users')
             .expect(200);
-    });
-    test('should ', () => {
-        expect().toBeDefined();
-    });
-    test('should ', () => {
-        expect().toEqual();
-    });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
     });
 });
 
@@ -79,47 +69,48 @@ describe('`GET` Method /users/id', () => {
             .get('/users/undefined')
             .expect(500);
     });
-    test('should ', () => {
-        expect().toBeDefined();
-    });
-    test('should ', () => {
-        expect().toEqual();
-    });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
-    });
 });
 
 /* getUserByRatings Function */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe(`'GET' Method /users/totalratings`, () => {
+    test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
+        mockUserService.getUserByRatings
+            .mockImplementation(async () => ({}));
+
+        await request(app)
+            .get('/users/52')
+            .expect(200)
+            .expect('content-type', 'application/json; charset=utf-8');
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
+        mockUserService.getUserByRatings
+            .mockImplementation(async () => ({}));
+
+        await request(app)
+            .get('/users/465')
+            .expect(404);
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
+        mockUserService.getUserByID
+            .mockImplementation(async () => ({}));
+
+        await request(app)
+            .get('/users/under')
+            .expect(500);
     });
 });
 
 /* createNewUser Function */
 
 describe(`'POST' Method /users`, () => {
-    test(`'POST' should return a 201 Status Code for Successful Creation of Book`, async () => {
+    test(`'POST' should return a 201 Status Code for Successful Creation of a User`, async () => {
         mockUserService.createNewUser
             .mockImplementation(async () => ({}));
         
         const newUser = {
             fullName: 'Gandalf Stormcrow',
-            handler: 'GandalfTheWhite',
+            handler: 'GandalfTheGrey',
             totalRatings: 0
         };
 
@@ -143,33 +134,39 @@ describe(`'POST' Method /users`, () => {
             .send(newUser)
             .expect(500);
     });
-    test('should ', () => {
-        expect().toBeDefined();
-    });
-    test('should ', () => {
-        expect().toEqual();
-    });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
-    });
 });
 
 /* patchUser Function */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe(`'PATCH' Method /users`, () => {
+    test(`'PATCH' should return a 200 Status Code for Sewing Up a User`, async () => {
+        mockUserService.patchUser
+            .mockImplementation(async () => ({}));
+        
+        const updatedUser = {
+            fullName: 'Gandalf Stormcrow',
+            handler: 'GandalfTheWhite',
+            totalRatings: 52
+        };
+
+        await request(app)
+            .post('/users')
+            .send(updatedUser)
+            .expect(201)
+            .expect('content-type', 'application.json; charset=utf-8');
     });
-    test('should ', () => {
-        expect().toEqual();
-    });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
+        mockBookService.patchUser
+            .mockImplementation(async () => ({}));
+        
+        const updatedUser = {
+            fullName: 'Gandalf Stormcrow',
+            handler: 1
+        };
+
+        await request(app)
+            .post('/users')
+            .send(updatedUser)
+            .expect(500);
     });
 });
