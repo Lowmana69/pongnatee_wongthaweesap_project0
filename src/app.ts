@@ -27,7 +27,7 @@ app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
 app.use('/books', booksRouter);
-app.use('/records', ratingsRouter);
+app.use('/records', recordsRouter);
 
 /* Initialize Port to Listen */
 
