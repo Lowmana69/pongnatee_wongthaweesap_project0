@@ -6,9 +6,11 @@ import ( User ) from '../../src/models/User';
 
 /*  */
 
-beforeAll()
-afterAll()
+beforeAll(() => initDatabase());
+afterAll(() => closeDatabase());
 
+const initDatabase = () => console.log('Database Initalized...');
+const closeDatabase = () => console.log('Database Closed...');
 /* Mock */
 
 jest.mock('../../src/daos/users-dao');

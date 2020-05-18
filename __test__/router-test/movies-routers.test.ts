@@ -7,8 +7,11 @@ import { moviesRouter } from '../../src/routers/movies-router';
 
 /*  */
 
-beforeAll()
-afterAll()
+beforeAll(() => initDatabase());
+afterAll(() => closeDatabase());
+
+const initDatabase = () => console.log('Database Initalized...');
+const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 
@@ -29,7 +32,7 @@ describe(`'GET' Method /movies`, () => {
         mockMovieService.getAllMovies
             .mockImplementation(async () => []);
 
-        awit request(app)
+        await request(app)
             .get('/movies')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');

@@ -6,8 +6,11 @@ import ( Movie ) from '../../src/models/Movie';
 
 /*  */
 
-beforeAll()
-afterAll()
+beforeAll(() => initDatabase());
+afterAll(() => closeDatabase());
+
+const initDatabase = () => console.log('Database Initalized...');
+const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 

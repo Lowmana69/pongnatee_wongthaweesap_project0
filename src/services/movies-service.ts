@@ -47,10 +47,10 @@ export function createNewMovie (movie: any): Promise<Movie> {
         movie.currentStatus && movie.isAvailable);
     
     if (params) {
-        return moviesDao.createNewmovie(newMovie);
-    } else (
+        return moviesDao.createNewMovie(newMovie);
+    } else {
         return new Promise((resolve, reject) => reject(422));
-    )
+    }
 }
 
 /* Update (Partial) A Single Movie From THe Database s*/
@@ -67,5 +67,5 @@ export function patchMovie (input: any): Promise<Movie> {
         throw new Error('400');
     }
 
-    return moviesDao.patchmovie(movie);
+    return moviesDao.patchMovie(movie);
 }

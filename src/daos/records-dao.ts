@@ -17,7 +17,9 @@ import { Record, RecordRow } from '../models/Record';
 /* Read / Retrieve All Records From The Database */
 
 export function getAllRecords(): Promise<Record[]> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM records';
+    
     return db.query<RecordRow>(sql, [])
         .then(result => {
             const rows: RecordRow[]= result.rows;
@@ -29,7 +31,9 @@ export function getAllRecords(): Promise<Record[]> {
 /* Read / Retrieve A Single Record By ID */
 
 export function getRecordById(id: number): Promise<Record> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM records WHERE id = $1';
+    
     return db.query<MovieRow> (sql, [id])
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
@@ -37,7 +41,9 @@ export function getRecordById(id: number): Promise<Record> {
 /* Read / Retrieve All Records By Category */
 
 export function getRecordByCategory(category: number): Promise<Record> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM records WHERE category = $1';
+    
     return db.query<MovieRow> (sql, [category])
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
@@ -45,7 +51,9 @@ export function getRecordByCategory(category: number): Promise<Record> {
 /* Read / Retrieve Records By Number of Ratings */
 
 export function getRecordsByNumbers(recommendation: number): Promise<Record> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM records WHERE recommendation = $1 LIMIT 5';
+    
     return db.query<MovieRow> (sql, [recommendation])
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
@@ -53,7 +61,9 @@ export function getRecordsByNumbers(recommendation: number): Promise<Record> {
 /* Read / Retrive Records By A Single User */
 
 export function getRecordsByUser(hander: number): Promise<Record> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM records WHERE "handler" = $1';
+    
     return db.query<MovieRow> (sql, [handler])
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
@@ -61,9 +71,14 @@ export function getRecordsByUser(hander: number): Promise<Record> {
 /* Create / Post A New Record To The Database*/
 
 export function createNewRecord(record: Record): Promise<Record> {
-    const sql = '';
+    
+    const sql = `INSERT INTO records (mediatitle, category, "handler", recommendation) \ 
+                VALUES
+	            ($1, $2, $3, $4) RETURNING *`;
+    
     const params = [record.mediatitle, record.category,
         record.recommendation, record.handler];
+    
     return db.query<RecordRow> (sql, params)
         .then(result => result.rows.map(row => Record.from(row))[0]);
 }
@@ -71,9 +86,14 @@ export function createNewRecord(record: Record): Promise<Record> {
 /* Update (Partial) / Patch A Current Record */
 
 export function patchRecord(record: Record): Promise<Record> {
-    const sql = '';
+    
+    const sql = `UPDATE records SET mediatitle = COALESCE($1, mediatitle), \
+        category = COALESCE($2, category ), "handler" = COALESCE($3, "handler" ) \
+        recommendation = COALESCE($4, recommendation ) WHERE id = $5 RETURNING *`;
+    
     const params = [record.mediatitle, record.category,
         record.recommendation, record.handler];
+
     return db.query<RecordRow> (sql, params)
         .then(result => result.rows.map(row => Record.from(row))[0]);
 }

@@ -17,7 +17,9 @@ import { User, UserRow } from '../models/User';
 /* Read / Retrieve All Users From The Database */
 
 export function getAllUsers(): Promise<User[]> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM users';
+    
     return db.query<UserRow>(sql, [])
         .then(result => {
             const rows: UserRow[]= result.rows;
@@ -29,7 +31,9 @@ export function getAllUsers(): Promise<User[]> {
 /* Read / Retrieve A Single User By ID */
 
 export function getUserById(id: number): Promise<User> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM users WHERE id = $1';
+    
     return db.query<UserRow> (sql, [id])
         .then(result => result.rows.map(row => User.from(row))[0]);
 }
@@ -37,7 +41,9 @@ export function getUserById(id: number): Promise<User> {
 /* Read / Retrivve A User(s) By Number of Ratings */
 
 export function getUserByRatings(totalratings: number): Promise<User> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM users WHERE totalratings > $1';
+    
     return db.query<UserRow> (sql, [totalratings])
         .then(result => result.rows.map(row => User.from(row))[0]);
 }
@@ -45,9 +51,13 @@ export function getUserByRatings(totalratings: number): Promise<User> {
 /* Create / Post A New User To The Database */
 
 export function createNewUser(user: User): Promise<User> {
-    const sql = '';
+    
+    const sql = `INSERT INTO users (fullname, "handler", totalratings) \ 
+        VALUES ($1, $2, $3) RETURNING *`;
+    
     const params = [user.fullName, user.handler,
         user.totalRatings];
+    
     return db.query<UserRow> (sql, params)
         .then(result => result.rows.map(row => User.from(row))[0]);
 }
@@ -55,9 +65,14 @@ export function createNewUser(user: User): Promise<User> {
 /* Update (Partial) / Patch A Current User */
 
 export function patchUser(user: User): Promise<User> {
-    const sql = '';
+    
+    const sql = `UPDATE users SET fullName = COALESCE($1, fullName ), \
+        "handler" = COALESCE($2, "handler" ), totalratings = COALESCE($3, totalratings) \
+        WHERE id = $4 RETURNING *`;
+    
     const params = [user.fullName, user.handler, 
             user.totalRatings];
+    
     return db.query<UserRow> (sql, params)
         .then(result => result.rows.map(row => User.from(row))[0]);
 }

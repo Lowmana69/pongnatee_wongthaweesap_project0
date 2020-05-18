@@ -22,10 +22,10 @@ export class User {
     }
 
     constructor(
-    id: number;
-    fullName: string;
-    handler: string;
-    totalRatings: number;
+    id: number,
+    fullName: string,
+    handler: string,
+    totalRatings: number
 
     ) {
         this.id = id;

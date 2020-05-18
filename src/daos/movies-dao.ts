@@ -17,7 +17,9 @@ import { Movie, MovieRow } from '../models/Movie';
 /* Read / Retrieve All Movies From The Database */
 
 export function getAllMovies(): Promise<Movie[]> {
-    const sql = '';
+   
+    const sql = 'SELECT * FROM movies';
+    
     return db.query<MovieRow>(sql, [])
         .then(result => {
             const rows: MovieRow[]= result.rows;
@@ -29,7 +31,9 @@ export function getAllMovies(): Promise<Movie[]> {
 /* Read / Retrieve A Single Movie Title By ID */
 
 export function getMovieById(id: number): Promise<Movie> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM movies WHERE id = $1';
+    
     return db.query<MovieRow> (sql, [id])
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
@@ -37,7 +41,9 @@ export function getMovieById(id: number): Promise<Movie> {
 /* Read / Retrieve All Movie Title(s) By Genre */
 
 export function getMovieByGenre(genre: number): Promise<Movie> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM movies WHERE genre = $1';
+    
     return db.query<MovieRow> (sql, [genre])
         .then(result => result.rows.map(row => Movie.from(row))[0])
 }
@@ -45,7 +51,9 @@ export function getMovieByGenre(genre: number): Promise<Movie> {
 /* Read / Retrieve A || All Movie Title(s) By First Letter */
 
 export function getMovieByFirstLetter(title: string): Promise<Movie> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM movies WHERE title LIKE $1';
+    
     return db.query<MovieRow> (sql, [title])
         .then(result => result.rows.map(row => Movie.from(row))[0])
 }
@@ -53,7 +61,9 @@ export function getMovieByFirstLetter(title: string): Promise<Movie> {
 /* Read / Retrieve All Movies By Year Release */
 
 export function getMovieByYear(bydecade: number): Promise<Movie> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM movies WHERE yearrelease = $1';
+    
     return db.query<MovieRow> (sql, [bydecade])
         .then(result => result.rows.map(row => Movie.from(row))[0])
 }
@@ -61,10 +71,16 @@ export function getMovieByYear(bydecade: number): Promise<Movie> {
 /* Create / Post A New Movie To The Database */
 
 export function createNewMovie(movie: Movie): Promise<Movie> {
-    const sql = '';
+    
+    const sql = `INSERT INTO movies \
+        (title, yearrelease , genre, totalratings, isavailable, currentstatus) \ 
+        VALUES
+	    ($1, $2, $3, $4, $5, $6) RETURNING *`;
+    
     const params = [movie.title, movie.genre
         movie.yearRelease, movie.totalRatings,
         movie.currentStatus, movie.isAvailable];
+    
     return db.query<MovieRow> (sql, params)
         .then(result => result.map(row => Movie.from(row))[0]);
 }
@@ -72,10 +88,17 @@ export function createNewMovie(movie: Movie): Promise<Movie> {
 /* Update (Partial) / Patch A Current Movie */
 
 export function patchMovie(movie: Movie): Promise<Movie> {
-    const sql = '';
+    
+    const sql = `UPDATE movies SET title = COALESCE($1, title), \ 
+        yearrelease = COALESCE($2, yearrelease), genre = COALESCE($3, genre) \ 
+        totalratings = COALESCE($4, totalratings), isavailable = COALESCE($5, isavailable) \
+        currentstatus = COALESCE($6, currentstatus)
+        WHERE id = $7 RETURNING *`;
+    
     const params = [movie.title, movie.genre
         movie.yearRelease, movie.totalRatings,
         movie.currentStatus, movie.isAvailable];
+    
     return db.query<MovieRow> (sql, params)
         .then(result => result.rows.map(row => Movie.from(row))[0]);
 }

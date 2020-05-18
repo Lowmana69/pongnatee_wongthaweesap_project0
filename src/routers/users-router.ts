@@ -33,7 +33,7 @@ usersRouter.get('', (request, response, next) => {
 */
 
 usersRouter.get('/:id', (request, response, next) => {
-    const id = request.params.id;
+    const id = +request.params.id;
     usersService.getUserById(id)
         .then(user => {
             if (!user) {
@@ -91,7 +91,7 @@ usersRouter.patch('', (request, response, next) => {
     const user = request.body;
     usersService.patchUser(user)
         .then(updatedUser => {
-            if () {
+            if (!user) {
                 response.json(updatedUser);
             } else {
                 response.sendStatus(404);

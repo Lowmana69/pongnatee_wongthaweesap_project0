@@ -7,8 +7,11 @@ import { recordsRouter } from '../../src/routers/records-router';
 
 /*  */
 
-beforeAll()
-afterAll()
+beforeAll(() => initDatabase());
+afterAll(() => closeDatabase());
+
+const initDatabase = () => console.log('Database Initalized...');
+const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 
@@ -29,7 +32,7 @@ describe(`'GET' Method /records`, () => {
         mockRecordService.getAllRecords
             .mockImplementation(async () => []);
 
-        awit request(app)
+        await request(app)
             .get('/records')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
@@ -38,7 +41,7 @@ describe(`'GET' Method /records`, () => {
         mockRecordService.getAllRecords
             .mockImplementation(async () => []);
 
-        awit request(app)
+        await request(app)
             .get('/records')
             .expect(200);
     });

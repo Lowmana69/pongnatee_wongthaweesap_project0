@@ -32,5 +32,5 @@ app.use('/records', recordsRouter);
 /* Initialize Port to Listen */
 
 app.listen(PORT, () => {
-    console.log(`Home app running at http://localhost:${port}`);
+    console.log(`Home app running at http://localhost:${PORT}`);
 });

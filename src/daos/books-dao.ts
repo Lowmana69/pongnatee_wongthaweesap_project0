@@ -12,7 +12,8 @@ import { Book, BookRow } from '../models/Book';
  */
 
 export function getAllBooks(): Promise<Book[]> {
-    const sql = '';
+   
+    const sql = 'SELECT * FROM books';
 
     return db.query<BookRow>(sql, []).then(result => {
         const rows: BookRow[] = result.rows;
@@ -25,7 +26,9 @@ export function getAllBooks(): Promise<Book[]> {
 /* Read / Retrieve A Single Book By ID */
 
 export function getBookById (id: number): Promise<Book> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM books WHERE id = $1';
+    
     return db.query<BookRow>(sql, [id])
         .then(result => result.rows.map(row => Book.from(row))[0]);
 }
@@ -33,7 +36,9 @@ export function getBookById (id: number): Promise<Book> {
 /* Read / Retrieve Book Titles By Genre */
 
 export function getBookByGenre (genre: number): Promise<Book> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM books WHERE genre = $1';
+    
     return db.query<BookRow>(sql, [genre])
         .then(result => result.rows.map(row => Book.from(row))[0]);
 
@@ -42,7 +47,9 @@ export function getBookByGenre (genre: number): Promise<Book> {
 /* Read / Retrieve Book Title(s) By First Letter */
 
 export function getBookByFirstLetter (title: string): Promise<Book> {
-    const sql = '';
+    
+    const sql = 'SELECT * FROM books WHERE title LIKE $1';
+    
     return db.query<BookRow>(sql, [title])
         .then(result => result.rows.map(row => Book.from(row))[0]);
 }
@@ -50,7 +57,9 @@ export function getBookByFirstLetter (title: string): Promise<Book> {
 /* Read / Retrieve Book Titles By Auther */
 
 export function getBookByAuthor (author: number): Promise<Book>{
-    const sql = '';
+   
+    const sql = 'SELECT * FROM books WHERE author = $1';
+    
     return db.query<BookRow>(sql, [author])
         .then(result => result.rows.map(row => Book.from(row))[0]);
 }
@@ -58,19 +67,28 @@ export function getBookByAuthor (author: number): Promise<Book>{
 /* Create / Post A New book To The Database */
 
 export function createNewBook (book: Book): Promise<Book> {
-    const sql = '';
+    const sql = `INSERT INTO books (title, author, genre, totalratings, isavailable, currentstatus) VALUES
+	($1, $2, $3, $4, $5, $6) RETURNING *`;
+    
     const params = [book.title, book.author, book.genre,
         book.totalRatings, book.isAvailable, book.currentStatus];
-    return db.query<BookRow>(sql, params)
+    
+        return db.query<BookRow>(sql, params)
         .then(result => result.rows.map(row => Book.from(row))[0]);
 }
 
 /* Update (Partial) / Patch A Current Book */
 
 export function patchBook (book: Book): Promise<Book> {
-    const sql = '';
+    
+    const sql = `UPDATE books SET title = COALESCE($1, title), \ 
+        author = COALESCE($2, author), genre = COALESCE($3, genre), \
+        totalratings = COALESCE($4, totalratings), isavailable = COALESCE($5, isavailable) \
+        currentstatus = COALESCE($6, currentstatus) WHERE id = $7 RETURNING *`;
+    
     const params = [book.title, book.author, book.genre,
         book.totalRatings, book.isAvailable, book.currentStatus];
+    
     return db.query<BookRow>(sql, params)
         .then(result => result.rows.map(row => Book.from(row))[0]);
 }

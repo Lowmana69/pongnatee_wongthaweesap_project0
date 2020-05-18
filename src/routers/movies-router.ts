@@ -32,7 +32,7 @@ moviesRouter.get('', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-moviessRouter.get('/:id', (request, response, next) => {
+moviesRouter.get('/:id', (request, response, next) => {
     const id = +request.params.id;
     moviesServices.getMovieById(id)
         .then(movie => {
@@ -125,12 +125,12 @@ moviesRouter.get('/:year', (request, response, next) => {
     Returns the inserted data as JSON with status 201.
 */
 
-moviessRouter.post('', (request, response, next) => {
+moviesRouter.post('', (request, response, next) => {
     const movie = request.body;
     moviesServices.createNewMovie(movie)
         .then(newMovie => {
             response.status(201);
-            response,json(newMovie);
+            response.json(newMovie);
             next();
         }).catch(error => {
             response.sendStatus(500);
@@ -140,7 +140,7 @@ moviessRouter.post('', (request, response, next) => {
 
 /* Upadte (Partial) / Patch A Current Movie */
 
-moviessRouter.patch('', (request, response, next) => {
+moviesRouter.patch('', (request, response, next) => {
     const movie = request.body;
     moviesServices.getAllMovies()
         .then(updatedMovie => {
