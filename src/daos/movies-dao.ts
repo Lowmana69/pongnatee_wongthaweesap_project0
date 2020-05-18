@@ -1,7 +1,7 @@
 /* Import Modules */
 
 import { db } from '../daos/database';
-import { Movie, MovieRow } from '../models/Movie';
+import { Movie, MovieRow } from '../../src/models/Movie';
 
 /**
  * If we are using a one-off query for, we can just use db.query - it will have a connection
@@ -77,12 +77,12 @@ export function createNewMovie(movie: Movie): Promise<Movie> {
         VALUES
 	    ($1, $2, $3, $4, $5, $6) RETURNING *`;
     
-    const params = [movie.title, movie.genre
+    const params = [movie.title, movie.genre,
         movie.yearRelease, movie.totalRatings,
         movie.currentStatus, movie.isAvailable];
     
     return db.query<MovieRow> (sql, params)
-        .then(result => result.map(row => Movie.from(row))[0]);
+        .then(result => result.rows.map(row => Movie.from(row))[0]);
 }
 
 /* Update (Partial) / Patch A Current Movie */
@@ -95,7 +95,7 @@ export function patchMovie(movie: Movie): Promise<Movie> {
         currentstatus = COALESCE($6, currentstatus)
         WHERE id = $7 RETURNING *`;
     
-    const params = [movie.title, movie.genre
+    const params = [movie.title, movie.genre,
         movie.yearRelease, movie.totalRatings,
         movie.currentStatus, movie.isAvailable];
     

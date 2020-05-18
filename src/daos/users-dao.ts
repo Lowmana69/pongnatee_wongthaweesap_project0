@@ -1,7 +1,7 @@
 /* Import Modules */
 
 import { db } from '../daos/database';
-import { User, UserRow } from '../models/User';
+import { User, UserRow } from '../../src/models/User';
 
 /**
  * If we are using a one-off query for, we can just use db.query - it will have a connection

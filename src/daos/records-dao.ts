@@ -1,7 +1,7 @@
 /* Import Modules */
 
 import { db } from '../daos/database';
-import { Record, RecordRow } from '../models/Record';
+import { Record, RecordRow } from '../../src/models/Record';
 
 /**
  * If we are using a one-off query for, we can just use db.query - it will have a connection
@@ -34,8 +34,8 @@ export function getRecordById(id: number): Promise<Record> {
     
     const sql = 'SELECT * FROM records WHERE id = $1';
     
-    return db.query<MovieRow> (sql, [id])
-        .then(result => result.rows.map(row => Movie.from(row))[0]);
+    return db.query<RecordRow> (sql, [id])
+        .then(result => result.rows.map(row => Record.from(row))[0]);
 }
 
 /* Read / Retrieve All Records By Category */
@@ -44,8 +44,8 @@ export function getRecordByCategory(category: number): Promise<Record> {
     
     const sql = 'SELECT * FROM records WHERE category = $1';
     
-    return db.query<MovieRow> (sql, [category])
-        .then(result => result.rows.map(row => Movie.from(row))[0]);
+    return db.query<RecordRow> (sql, [category])
+        .then(result => result.rows.map(row => Record.from(row))[0]);
 }
 
 /* Read / Retrieve Records By Number of Ratings */
@@ -54,18 +54,18 @@ export function getRecordsByNumbers(recommendation: number): Promise<Record> {
     
     const sql = 'SELECT * FROM records WHERE recommendation = $1 LIMIT 5';
     
-    return db.query<MovieRow> (sql, [recommendation])
-        .then(result => result.rows.map(row => Movie.from(row))[0]);
+    return db.query<RecordRow> (sql, [recommendation])
+        .then(result => result.rows.map(row => Record.from(row))[0]);
 }
 
 /* Read / Retrive Records By A Single User */
 
-export function getRecordsByUser(hander: number): Promise<Record> {
+export function getRecordsByUser(handler: number): Promise<Record> {
     
     const sql = 'SELECT * FROM records WHERE "handler" = $1';
     
-    return db.query<MovieRow> (sql, [handler])
-        .then(result => result.rows.map(row => Movie.from(row))[0]);
+    return db.query<RecordRow> (sql, [handler])
+        .then(result => result.rows.map(row => Record.from(row))[0]);
 }
 
 /* Create / Post A New Record To The Database*/

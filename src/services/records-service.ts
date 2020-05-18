@@ -6,7 +6,7 @@ import * as recordsDao from '../daos/records-dao';
  /* Read / Retrieve All Records From The Database */
 
 export function getAllRecords (): Promise<Record[]> {
-    return recordsDao/getAllRecords();
+    return recordsDao.getAllRecords();
 }
 
 /* Read / Retrieve A Single Record By ID */
@@ -35,7 +35,7 @@ export function getRecordsByUser (handler: number): Promise<Record> {
 
  /* Create / Post A New Record To The Database */
 
-export function createNewRecord (rating: any): Promise<Record> {
+export function createNewRecord (record: any): Promise<Record> {
     const newRecord = new Record (
         undefined, record.category,
         record.handler, record.totalRatings,

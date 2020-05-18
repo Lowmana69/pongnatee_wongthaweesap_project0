@@ -1,7 +1,7 @@
 /* Import Modules */
 
 import express from 'express';
-import * booksService from '../services/books-service';
+import * as booksService from '../../src/services/books-service';
 
 /* Export Book Router Functions */
 
@@ -99,7 +99,7 @@ booksRouter.get('/:title', (request, response, next) => {
 */
 // TODO: Check the logic out
 booksRouter.get('/:author', (request, response, next) => {
-    const author = request.params.author;
+    const author = +request.params.author;
     booksService.getBookByAuthor(author)
         .then(author => {
             if (!author) {

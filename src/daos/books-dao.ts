@@ -1,7 +1,7 @@
 /* Import Modules */
 
 import { db } from '../daos/database';
-import { Book, BookRow } from '../models/Book';
+import { Book, BookRow } from '../../src/models/Book';
 
 /* Read / Retrieve All Books From The Database */
 
@@ -48,7 +48,7 @@ export function getBookByGenre (genre: number): Promise<Book> {
 
 export function getBookByFirstLetter (title: string): Promise<Book> {
     
-    const sql = 'SELECT * FROM books WHERE title LIKE $1';
+    const sql = `SELECT * FROM books WHERE title LIKE '%%'`;
     
     return db.query<BookRow>(sql, [title])
         .then(result => result.rows.map(row => Book.from(row))[0]);

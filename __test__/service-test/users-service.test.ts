@@ -1,8 +1,8 @@
 /* Import Modules */
 
-import * as UserService from '../../src/services/users-services';
-import * as UserDao from '../..src/daos/users-dao';
-import ( User ) from '../../src/models/User';
+import * as UserService from '../../src/services/users-service';
+import * as UserDao from '../../src/daos/users-dao';
+import { User } from '../../src/models/User';
 
 /*  */
 

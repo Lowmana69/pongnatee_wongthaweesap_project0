@@ -1,8 +1,8 @@
 /* Import Modules */
 
-import * as movieService from '../../src/services/movies-services';
-import * as movieDao from '../..src/daos/movies-dao';
-import ( Movie ) from '../../src/models/Movie';
+import * as movieService from '../../src/services/movies-service';
+import * as movieDao from '../../src/daos/movies-dao';
+import { Movie } from '../../src/models/Movie';
 
 /*  */
 

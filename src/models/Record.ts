@@ -2,9 +2,9 @@
 
 export class Record {
     id: number;
+    mediatitle: string;
     category: number;
     handler: number;
-    totalRatings: number;
     recommendation: number;
 
     /**
@@ -15,9 +15,9 @@ export class Record {
     static from(obj: RecordRow): Record {
         const record = new Record(
             obj.id,
+            obj.mediatitle,
             obj.category,
             obj.handler,
-            obj.totalRatings,
             obj.recommendation
         );
         return record;
@@ -25,15 +25,15 @@ export class Record {
 
     constructor(
     id: number,
+    mediatitle: string,
     category: number,
     handler: number,
-    totalRatings: number,
     recommendation: number
     ) {
         this.id = id;
+        this.mediatitle = mediatitle;
         this.category = category;
         this.handler = handler;
-        this.totalRatings = totalRatings;
         this.recommendation = recommendation;
     }
 }
@@ -42,8 +42,8 @@ export class Record {
 
 export interface RecordRow {
     id: number;
+    mediatitle: string;
     category: number;
     handler: number;
-    totalRatings: number;
     recommendation: number;
 }

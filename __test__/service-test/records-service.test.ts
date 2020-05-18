@@ -1,8 +1,8 @@
 /* Import Modules */
 
-import * as recordService from '../../src/services/records-services';
-import * as recordDao from '../..src/daos/records-dao';
-import ( Record ) from '../../src/models/Record';
+import * as recordService from '../../src/services/records-service';
+import * as recordDao from '../../src/daos/users-dao';
+import { Record } from '../../src/models/Record';
 
 /*  */
 

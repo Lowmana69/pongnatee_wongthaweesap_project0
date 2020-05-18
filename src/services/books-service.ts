@@ -48,9 +48,9 @@ export function createNewBook (book: any): Promise<Book> {
     
     if (params) {
         return booksDao.createNewBook(newBook);
-    } else (
-        return new Promise((resolve, reject) => rejecxt(422));
-    )
+    } else {
+        return new Promise((resolve, reject) => reject(422));
+    }
 }
 
 /* Update (Partial) / Patch A Book From The Database */

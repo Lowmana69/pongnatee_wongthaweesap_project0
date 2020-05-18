@@ -35,11 +35,11 @@ recordsRouter.get('', (request, response, next) => {
 recordsRouter.get('/:id', (request, response, next) => {
     const id = +request.params.id;
     recordsService.getRecordById(id)
-        .then(record => {
-            if (!record) {
+        .then(id => {
+            if (!id) {
                 response.sendStatus(404);
             } else {
-                response.json(record)
+                response.json(id)
             }
         }).catch(error => {
             response.sendStatus(500);
@@ -78,7 +78,7 @@ recordsRouter.get('/:category', (request, response, next) => {
 
 recordsRouter.get('/:recommendations', (request, response, next) => {
     const recommendation = +request.params.recommendation;
-    recordsService.getRecordsByNumbers(recommendation)
+    recordsService.getRatingsByNumbers(recommendation)
         .then(recommendation => {
             if (!recommendation) {
                 response.sendStatus(404);
@@ -101,7 +101,7 @@ recordsRouter.get('/:recommendations', (request, response, next) => {
 recordsRouter.get('/:handler', (request, response, next) => {
     const handler = +request.params.handler;
     recordsService.getRecordsByUser(handler)
-        .then(handler => {ß
+        .then(handler => {
             if (!handler) {
                 response.sendStatus(404);
             } else {
@@ -140,7 +140,7 @@ recordsRouter.patch('', (request, response, next) => {
     const record = request.body;
     recordsService.patchRecord(record)
         .then(updatedRecord => {
-            if () {
+            if (!record) {
                 response.json(updatedRecord);
             } else {
                 response.sendStatus(404);
