@@ -54,7 +54,7 @@ booksRouter.get('/:id', (request, response, next) => {
     Retrieves an array of people from database
 */
 // TODO: Check the logic out
-booksRouter.get('/:genre', (request, response, next) => {
+booksRouter.get('/genre/:genre', (request, response, next) => {
     const genre = +request.params.genre;
     booksService.getBookByGenre(genre)
         .then(genre => {

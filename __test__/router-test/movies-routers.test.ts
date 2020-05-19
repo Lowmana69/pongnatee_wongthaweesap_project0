@@ -30,7 +30,7 @@ app.use('/movies', moviesRouter);
 describe(`'GET' Method /movies`, () => {
     test(`'GET' request should return normally with a 200 Status Code`, async () => {
         mockMovieService.getAllMovies
-            .mockImplementation(() => []);
+            .mockImplementation( async () => []);
 
         await request(app)
             .get('/movies')
@@ -39,11 +39,11 @@ describe(`'GET' Method /movies`, () => {
     });
     test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
         mockMovieService.getAllMovies
-            .mockImplementation(() => []);
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/movies')
-            .expect(200);
+            .expect(500);
     });
 });
 
@@ -51,8 +51,8 @@ describe(`'GET' Method /movies`, () => {
 
 describe(`'GET' Method /users/id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockMovieService.getMovieByID
-            .mockImplementation(() => ({}));
+        mockMovieService.getMovieById
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get('/movies/1')
@@ -60,16 +60,16 @@ describe(`'GET' Method /users/id`, () => {
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockMovieService.getMovieByID
-            .mockImplementation(() => ({}));
+        mockMovieService.getMovieById
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/movies/465')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockMovieService.getMovieByID
-            .mockImplementation(() => ({}));
+        mockMovieService.getMovieById
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/movie/undefined')
@@ -82,7 +82,7 @@ describe(`'GET' Method /users/id`, () => {
 describe(`'GET' Method /movies/genre`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockMovieService.getMovieByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get('/movies/3')
@@ -91,7 +91,7 @@ describe(`'GET' Method /movies/genre`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockMovieService.getMovieByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/movies/465')
@@ -99,7 +99,7 @@ describe(`'GET' Method /movies/genre`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockMovieService.getMovieByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/movie/null')
@@ -112,7 +112,7 @@ describe(`'GET' Method /movies/genre`, () => {
 describe(`'GET' Method /movies/title`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockMovieService.getMovieByFirstLetter
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get(`/movies/'T'`)
@@ -121,7 +121,7 @@ describe(`'GET' Method /movies/title`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockMovieService.getMovieByFirstLetter
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get(`/movies/'Z'`)
@@ -129,7 +129,7 @@ describe(`'GET' Method /movies/title`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockMovieService.getMovieByFirstLetter
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
             
         await request(app)
             .get('/movie/452')
@@ -144,7 +144,7 @@ describe(`'GET' Method /movies/title`, () => {
 describe(`'POST' Method /movies`, () => {
     test(`'POST' should return a 201 Status Code for Successful Creation of a Movie`, async () => {
         mockMovieService.createNewMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const newMovie = {
             title: 'Godzilla 2000',
@@ -163,7 +163,7 @@ describe(`'POST' Method /movies`, () => {
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
         mockMovieService.createNewMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
         
         const newMovie = {
             title: 'Godzilla 2000',
@@ -183,7 +183,7 @@ describe(`'POST' Method /movies`, () => {
 describe(`'PATCH' Method /movies`, () => {
     test(`'PATCH' should return a 200 Status Code for Patching Up a Movie`, async () => {
         mockMovieService.patchMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const updatedMovie = {
             title: 'Godzilla',
@@ -202,7 +202,7 @@ describe(`'PATCH' Method /movies`, () => {
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockMovieService.patchMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
         
         const updatedMovie = {
             title: 'Godzilla 2000',

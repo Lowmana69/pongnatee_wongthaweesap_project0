@@ -27,7 +27,7 @@ describe('getAllRecords Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.getAllRecords
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await RecordsService.getAllRecords();
 
@@ -37,31 +37,21 @@ describe('getAllRecords Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.getAllRecords
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await RecordsService.getAllRecords();
 
-        try {
             expect(result).toContain([]);
-            fail('RecordsService.getAllRecords did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getAllRecords' should NOT contain an object`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getAllRecords
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await RecordsService.getAllRecords();
 
-        try {
             expect(result).not.toContain({});
-            fail('RecordsService.getAllRecords did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -73,46 +63,31 @@ describe('getRecordById Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordById;
 
-        try {
             expect(result).toBeDefined();
-            fail('RecordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordById' should contain a Record at ID #11`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordById(11);
 
-        try {
             expect(result).toContain({});
-            fail('RecordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordById' should NOT contain a Record with ID #366`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordById(366);
 
-        try {
             expect(result).not.toContain({});
-            fail('ReordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -124,46 +99,31 @@ describe('getRecordByCategory Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByCategory
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByCategory;
 
-        try {
             expect(result).toBeDefined();
-            fail('RecordsService.getRecordByCategory did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordByCategory' should contain a Record at Category #11`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByCategory
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByCategory(11);
 
-        try {
             expect(result).toContain({});
-            fail('RecordsService.getRecordByCategory did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordByCategory' should NOT contain a Record with Category #366`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByCategory(366);
 
-        try {
             expect(result).not.toContain({});
-            fail('ReordsService.getRecordByCategory did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -175,46 +135,31 @@ describe('getRecordByUser Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByUser;
 
-        try {
             expect(result).toBeDefined();
-            fail('RecordsService.getRecordByUser did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordByUser' should contain a Record at Handler #11`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByUser(11);
 
-        try {
             expect(result).toContain({});
-            fail('RecordsService.getRecordByUser did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getRecordByUser' should NOT contain a Record with Handler #366`, async () => {
         expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await RecordsService.getRecordsByUser(366);
 
-        try {
             expect(result).not.toContain({});
-            fail('ReordsService.getRecordByUser did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -223,7 +168,7 @@ describe('getRecordByUser Function', () => {
 describe('createNewRecord Function', () => {
     test('New Input Object should create a new Record Object', async () => {
         mockRecordsDao.createNewRecord
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newRecord = {
             mediatitle: '10,000 Leagues Under the Sea',
@@ -239,7 +184,7 @@ describe('createNewRecord Function', () => {
     });
     test('Input ID value should not be pass test', async () => {
         mockRecordsDao.createNewRecord
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newRecord = {
             id: 23,
@@ -256,7 +201,7 @@ describe('createNewRecord Function', () => {
     });
     test('Extra properties should not be able to pass', async () => {
         mockRecordsDao.createNewRecord
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newRecord = {
             mediatitle: '10,000 Leagues Under the Sea',
@@ -275,7 +220,7 @@ describe('createNewRecord Function', () => {
         expect.assertions(0);
 
         mockRecordsDao.createNewRecord
-            .mockImplementatin(() => ({}));
+            .mockImplementatin( async () => ({}));
         
         const newRecord = {
             mediatitle: '10,000 Leagues Under the Sea',
@@ -286,8 +231,8 @@ describe('createNewRecord Function', () => {
         try {
             await RecordsService.createNewRecord(newRecord);
             fail('RecordsService.createNewRecord did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
+        } catch (err) {
+            expect(err).toBeDefined();
         }
     });
 });
@@ -312,8 +257,8 @@ describe('patchRecord Function', () => {
         try {
             await RecordsService.patchRecord(patchRecord);
             expect(patchRecord).toBeTruthy();
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
 
     });
@@ -330,8 +275,8 @@ describe('patchRecord Function', () => {
 
         try {
             await RecordsService.patchRecord(patchRecord);
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
     });
 });

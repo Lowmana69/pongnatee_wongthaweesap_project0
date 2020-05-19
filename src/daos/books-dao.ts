@@ -35,12 +35,17 @@ export function getBookById (id: number): Promise<Book> {
 
 /* Read / Retrieve Book Titles By Genre */
 
-export function getBookByGenre (genre: number): Promise<Book> {
+export function getBookByGenre (genre: number): Promise<Book[]> {
     
     const sql = 'SELECT * FROM books WHERE genre = $1';
     
     return db.query<BookRow>(sql, [genre])
-        .then(result => result.rows.map(row => Book.from(row))[0]);
+        .then(result => {
+            const rows: BookRow[] = result.rows;
+    
+            const book: Book[] = rows.map(row => Book.from(row));
+            return book;
+        });
 
 }
 

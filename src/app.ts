@@ -29,6 +29,17 @@ app.use('/movies', moviesRouter);
 app.use('/books', booksRouter);
 app.use('/records', recordsRouter);
 
+/*
+    Listen for signal - issued by closing the server with ctrl+c
+    This releases the database connections prior to app being stopped
+*/
+
+process.on('unhandledRejection', () => {
+    db.end().then(() => {
+        console.log('Database pool closed');
+    });
+});
+
 /* Initialize Port to Listen */
 
 app.listen(PORT, () => {

@@ -23,45 +23,36 @@ const mockMoviesDao = MoviesDao as any;
 /* getAllMovies Function */
 
 describe('getAllMovies Function', () => {
-    test(`'getAllMovies Function exists`, () => {
+    test(`'getAllMovies Function exists`, async () => {
         expect.assertions(1);
 
         mockMoviesDao.getAllMovies
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await MoviesService.getAllMovies();
 
         expect(result).toBeDefined();
     });
-    test(`'getAllMovies' should return an array`, () => {
-        expect.assertions(1);
+    test(`'getAllMovies' should return an array`, async () => {
+        expect.assertions(2);
 
         mockMoviesDao.getAllMovies
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await MoviesService.getAllMovies();
 
-        try {
             expect(result).toContain([]);
-            fail('MoviesService.getAllMovies did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
-    test(`'getAllMovies' should NOT contain an object`, () => {
+    test(`'getAllMovies' should NOT contain an object`, async () => {
         expect.assertions(1);
 
         mockMoviesDao.getAllMovies
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await MoviesService.getAllMovies();
 
-        try {
             expect(result).not.toContain({});
-            fail('MoviesService.getAllMovies did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
+
     });
 });
 
@@ -73,46 +64,30 @@ describe('getMovieById Function', () => {
         expect.assertions(1);
 
         mockMoviesDao.getMovieById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await MoviesService.getMovieById;
 
-        try {
             expect(result).toBeDefined();
-            fail('MoviesService.getMovieById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getMovieById' should contain a Movie at ID #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockMoviesDao.getMovieById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await MoviesService.getMovieById(11);
 
-        try {
             expect(result).toContain({});
-            fail('MoviesService.getMovieById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getMovieById' should NOT contain a Movie with ID #366`, async () => {
-        expect.assertions(1);
 
-        mockMoviesDao.getMoviekById
-            .mockImplementation(() => ({}));
+        mockMoviesDao.getMovieById
+            .mockImplementation( async () => ({}));
         
         const result = await MoviesService.getMovieById(366);
 
-        try {
             expect(result).not.toContain({});
-            fail('MoviesService.getMovieById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -124,47 +99,32 @@ describe('getMovieByGenre', () => {
         expect.assertions(1);
 
         mockMoviesDao.getMovieByGenre
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await MoviesService.getMovieByGenre;
 
-        try {
             expect(result).toBeDefined();
-            fail('MoviesService.getMovieByGenre did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getMovieByGenre' should contain a Movie at Genre #5`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockMoviesDao.getMovieByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await MoviesService.getMovieByGenre(5);
 
-        try {
             expect(result).toContain({});
-            fail('MoviesService.getMovieByGenre did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getMovieByGenre' should NOT contain a Movie at Genre #600`, async () => {
         expect.assertions(1);
 
         mockMoviesDao.getMovieByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await MoviesService.getMovieByGenre(600);
 
-        try {
-            expect(result).not.toContain({});
-            fail('MvoiesService.getMovieByGenre did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
+            expect(result).not.toContain({});   
     });
 });
 
@@ -177,7 +137,7 @@ describe('getMovieByGenre', () => {
 describe('createNewMovie', () => {
     test('New Input Object should create a new Movie Object', async () => {
         mockMoviesDao.createNewMovie
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newMovie = {
             title: 'Diary of Tootsie',
@@ -195,7 +155,7 @@ describe('createNewMovie', () => {
     });
     test('Input ID value should not be pass test', async () => {
         mockMoviesDao.createNewMovie
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newMovie = {
             id: 23,
@@ -214,7 +174,7 @@ describe('createNewMovie', () => {
     });
     test('Extra properties should not be able to pass', async () => {
         mockMoviesDao.createNewMovie
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newMovie = {
             title: 'Diary of Tootsie',
@@ -232,7 +192,7 @@ describe('createNewMovie', () => {
         expect(result.origin).not.toBeDefined();
     });
     test(`A '422' Error should return if no Genre Input is provided`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockMoviesDao.createNewMovie
             .mockImplementatin(() => ({}));
@@ -248,8 +208,8 @@ describe('createNewMovie', () => {
         try {
             await MoviesService.createNewMovie(newMovie);
             fail('MoviesService.createNewMovie did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
+        } catch (err) {
+            expect(err).toBeDefined();
         }
     });
 });
@@ -261,7 +221,7 @@ describe('patchMovie Function', () => {
         expect.assertions(1);
 
         mockMoviesDao.patchMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         const patchMovie = {
             id: 13,
@@ -272,8 +232,8 @@ describe('patchMovie Function', () => {
         try {
             await MoviesService.patchMovie(patchMovie);
             expect(patchMovie).toBeTruthy();
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
 
     });
@@ -281,7 +241,7 @@ describe('patchMovie Function', () => {
         expect.assertions(1);
 
         mockMoviesDao.patchMovie
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         const patchMovie = {
             title: 'Jaws',
@@ -291,8 +251,8 @@ describe('patchMovie Function', () => {
 
         try {
             await MoviesService.patchMovie(patchMovie);
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
     });
 });

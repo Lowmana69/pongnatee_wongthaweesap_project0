@@ -17,7 +17,7 @@ export function getBookById (id: number): Promise<Book> {
 
 /* Read / Retrieve Books By Genre */
 
-export function getBookByGenre (genre: number): Promise<Book> {
+export function getBookByGenre (genre: number): Promise<Book[]> {
     return booksDao.getBookByGenre(genre);
 }
 

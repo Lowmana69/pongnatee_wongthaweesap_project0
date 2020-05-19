@@ -28,7 +28,7 @@ describe('getAllBooks Function', () => {
         expect.assertions(1);
 
         mockBooksDao.getAllBooks
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await BooksService.getAllBooks();
 
@@ -37,34 +37,24 @@ describe('getAllBooks Function', () => {
     });
     test(`'getAllBooks' should return an array`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockBooksDao.getAllBooks
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await BooksService.getAllBooks();
 
-        try {
             expect(result).toContain([]);
-            fail('BooksService.getAllBooks did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getAllBooks' should NOT contain an object`, async () => {
         expect.assertions(1);
 
         mockBooksDao.getAllBooks
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await BooksService.getAllBooks();
 
-        try {
             expect(result).not.toContain({});
-            fail('BooksService.getAllBooks did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -76,46 +66,31 @@ describe('getBookById Function', () => {
         expect.assertions(1);
 
         mockBooksDao.getBookById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookById;
 
-        try {
             expect(result).toBeDefined();
-            fail('BooksService.getAllBooks did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByID' should contain a Book at ID #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockBooksDao.getBookById
-            .mockImplementation(() => ({}));
-        
+            .mockImplementation( async () => ({}));
+
         const result = await BooksService.getBookById(11);
 
-        try {
             expect(result).toContain({});
-            fail('BooksService.getBookById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByID' should NOT contain a Book with ID #366`, async () => {
         expect.assertions(1);
 
         mockBooksDao.getBookById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookById(366);
 
-        try {
             expect(result).not.toContain({});
-            fail('BooksService.getBookById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -127,47 +102,32 @@ describe('getBookByGenre Function', () => {
         expect.assertions(1);
 
         mockBooksDao.getBookByGenre
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await BooksService.getBookByGenre;
 
-        try {
             expect(result).toBeDefined();
-            fail('BooksService.getAllBooks did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByGenre' should contain a Book at Genre #5`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockBooksDao.getBookByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookByGenre(5);
 
-        try {
             expect(result).toContain({});
-            fail('BooksService.getBookById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByGenre' should NOT contain a Book at Genre #600`, async () => {
         expect.assertions(1);
 
         mockBooksDao.getBookByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookByGenre(600);
 
-        try {
             expect(result).not.toContain({});
-            fail('BooksService.getBookById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -179,46 +139,31 @@ describe('getBookByAuthor Function', () => {
         expect.assertions(1);
 
         mockBooksDao.getBookByAuthor
-            .mockImplementation(() => ([]));
+            .mockImplementation( async () => ([]));
         
         const result = await BooksService.getBookByAuthor;
 
-        try {
             expect(result).toBeDefined();
-            fail('BooksService.getBookByAuthor did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByAuthor' should contain an Author at ID #4`, async () => {
         expect.assertions(1);
 
         mockBooksDao.getBookByAuthor
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookByAuthor(4);
 
-        try {
             expect(result).toContain({});
-            fail('BooksService.getBookByAuthor did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
     test(`'getBookByAuthor' should NOT contain an Author with ID #66`, async () => {
         expect.assertions(1);
 
         mockBooksDao.getBookByAuthor
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const result = await BooksService.getBookByAuthor(66);
 
-        try {
             expect(result).not.toContain({});
-            fail('BooksService.getBookByAuthor did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
     });
 });
 
@@ -230,7 +175,7 @@ describe('createNewBook Function', () => {
 
    test('New Input Object should create a new Book Object', async () => {
         mockBooksDao.createNewBook
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newBook = {
             title: 'The Diary of Anne Frank',
@@ -249,7 +194,7 @@ describe('createNewBook Function', () => {
 
     test('Input ID value should not be pass test', async () => {
         mockBooksDao.createNewBook
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newBook = {
             id: 23,
@@ -269,7 +214,7 @@ describe('createNewBook Function', () => {
 
     test('Extra properties should not be able to pass', async () => {
         mockBooksDao.createNewBook
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newBook = {
             title: 'The Diary of Anne Frank',
@@ -288,10 +233,9 @@ describe('createNewBook Function', () => {
     });
 
     test(`A '422' Error should return if no Genre Input is provided`, async () => {
-        expect.assertions(1);
-
+        expect.assertions(0);
         mockBooksDao.createNewBook
-            .mockImplementatin(() => ({}));
+            .mockImplementatin( async () => ({}));
         
         const newBook = {
             title: 'Diary of Anne Frank',
@@ -304,8 +248,8 @@ describe('createNewBook Function', () => {
         try {
             await BooksService.createNewBook(newBook);
             fail('BooksService.createNewBook did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
+        } catch (err) {
+            expect(err).toBeDefined();
         }
     });
 });
@@ -317,7 +261,7 @@ describe('patchBook Function', () => {
         expect.assertions(1);
 
         mockBooksDao.patchBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         const patchBook = {
             id: 13,
@@ -328,8 +272,8 @@ describe('patchBook Function', () => {
         try {
             await BooksService.patchBook(patchBook);
             expect(patchBook).toBeTruthy();
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
 
     });
@@ -337,7 +281,7 @@ describe('patchBook Function', () => {
         expect.assertions(1);
 
         mockBooksDao.patchBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         const patchBook = {
             title: 'The Power of Habits',
@@ -347,8 +291,8 @@ describe('patchBook Function', () => {
 
         try {
             await BooksService.patchBook(patchBook);
-        } catch (error) {
-            expect(error).toBeTruthy();
+        } catch (err) {
+            expect(err).toBeTruthy();
         }
     });
 });

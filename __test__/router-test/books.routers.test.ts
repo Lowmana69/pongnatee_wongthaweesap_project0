@@ -30,7 +30,7 @@ app.use('/books', booksRouter);
 describe(`'GET' Method /booka`, () => {
     test(`'GET' request should return normally with a 200 Status Code`, async () => {
         mockBookService.getAllBooks
-            .mockImplementation(() => []);
+            .mockImplementation( async () => ([]));
             
         await request(app)
             .get('/books')
@@ -39,7 +39,7 @@ describe(`'GET' Method /booka`, () => {
     });
     test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
         mockBookService.getAllBooks
-            .mockImplementation(() => []);
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/books')
@@ -52,7 +52,7 @@ describe(`'GET' Method /booka`, () => {
 describe(`'GET' Method /books/id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockBookService.getBookById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get('/books/1')
@@ -61,7 +61,7 @@ describe(`'GET' Method /books/id`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockBookService.getBookById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/books/465')
@@ -69,7 +69,7 @@ describe(`'GET' Method /books/id`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockBookService.getBookById
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/books/undefined')
@@ -82,7 +82,7 @@ describe(`'GET' Method /books/id`, () => {
 describe(`'GET' Method /books/genre`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockBookService.getBookByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get('/books/2')
@@ -91,7 +91,7 @@ describe(`'GET' Method /books/genre`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockBookService.getBookByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/books/465')
@@ -99,7 +99,7 @@ describe(`'GET' Method /books/genre`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockBookService.getBookByGenre
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/books/undefined')
@@ -112,7 +112,7 @@ describe(`'GET' Method /books/genre`, () => {
 describe(`'GET' Method /books/author`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockBookService.getBookByAuthor
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         await request(app)
             .get('/books/2')
@@ -121,7 +121,7 @@ describe(`'GET' Method /books/author`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockBookService.getBookByAuthor
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/books/465')
@@ -129,7 +129,7 @@ describe(`'GET' Method /books/author`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockBookService.getBookByAuthor
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/books/undefined')
@@ -142,7 +142,7 @@ describe(`'GET' Method /books/author`, () => {
 describe(`'POST' Method /people`, () => {
     test(`'POST' should return a 201 Status Code for Successful Creation of a Book`, async () => {
         mockBookService.createNewBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const newBook = {
             title: 'Diary of Anne Frank',
@@ -161,7 +161,7 @@ describe(`'POST' Method /people`, () => {
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
         mockBookService.createNewBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
         
         const newBook = {
             title: 'Diary of Anne Frank',
@@ -181,7 +181,7 @@ describe(`'POST' Method /people`, () => {
 describe(`'PATCH' Method /books`, () => {
     test(`'PATCH' should return a 200 Status Code for Patch Up`, async () => {
         mockBookService.patchBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const updatedBook = {
             id: 34,
@@ -201,7 +201,7 @@ describe(`'PATCH' Method /books`, () => {
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockBookService.patchBook
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
         
         const updatedBook = {
             title: 'Diary of Anne Frank',

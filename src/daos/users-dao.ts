@@ -23,8 +23,8 @@ export function getAllUsers(): Promise<User[]> {
     return db.query<UserRow>(sql, [])
         .then(result => {
             const rows: UserRow[]= result.rows;
-            const user: User[] = rows.map(row => User.from(row));
-            return user; 
+            const users: User[] = rows.map(row => User.from(row));
+            return users; 
         });
 }
 

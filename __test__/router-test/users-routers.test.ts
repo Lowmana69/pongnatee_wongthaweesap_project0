@@ -30,7 +30,7 @@ app.use('/users', usersRouter);
 describe(`'GET' Method /users`, () => {
     test(`'GET' request should return normally with a 200 Status Code`, async () => {
         mockUserService.getAllUsers
-            .mockImplementation(() => []);
+            .mockImplementation( async () => []);
 
         await request(app)
             .get('/users')
@@ -39,35 +39,35 @@ describe(`'GET' Method /users`, () => {
     });
     test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
         mockUserService.getAllUsers
-            .mockImplementation(() => []);
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/users')
-            .expect(200);
+            .expect(500);
     });
 });
 
 /* getUserByID Function */
 
-describe('`GET` Method /users/id', () => {
+describe(`'GET' Method /users/id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockUserService.getUserByID
-            .mockImplementation(() => ({}));
+        mockUserService.getUserById
+            .mockImplementation( async () => ({}));
         await request(app)
             .get('/users/1')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockUserService.getUserByID
-            .mockImplementation(() => ({}));
+        mockUserService.getUserById
+            .mockImplementation( async () => (0));
         await request(app)
             .get('/users/465')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockUserService.getUserByID
-            .mockImplementation(() => ({}));
+        mockUserService.getUserById
+            .mockImplementation( async () => {throw new Error()});
         await request(app)
             .get('/users/undefined')
             .expect(500);
@@ -79,7 +79,7 @@ describe('`GET` Method /users/id', () => {
 describe(`'GET' Method /users/totalratings`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockUserService.getUserByRatings
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
 
         await request(app)
             .get('/users/52')
@@ -88,7 +88,7 @@ describe(`'GET' Method /users/totalratings`, () => {
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
         mockUserService.getUserByRatings
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => (0));
 
         await request(app)
             .get('/users/465')
@@ -96,7 +96,7 @@ describe(`'GET' Method /users/totalratings`, () => {
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
         mockUserService.getUserByID
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/users/under')
@@ -109,7 +109,7 @@ describe(`'GET' Method /users/totalratings`, () => {
 describe(`'POST' Method /users`, () => {
     test(`'POST' should return a 201 Status Code for Successful Creation of a User`, async () => {
         mockUserService.createNewUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const newUser = {
             fullName: 'Gandalf Stormcrow',
@@ -124,8 +124,8 @@ describe(`'POST' Method /users`, () => {
             .expect('content-type', 'application.json; charset=utf-8');
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
-        mockBookService.createNewUser
-            .mockImplementation(() => ({}));
+        mockUserService.createNewUser
+            .mockImplementation( async () => {throw new Error()});
         
         const newUser = {
             fullName: 'Gandalf Stormcrow',
@@ -144,7 +144,7 @@ describe(`'POST' Method /users`, () => {
 describe(`'PATCH' Method /users`, () => {
     test(`'PATCH' should return a 200 Status Code for Sewing Up a User`, async () => {
         mockUserService.patchUser
-            .mockImplementation(() => ({}));
+            .mockImplementation( async () => ({}));
         
         const updatedUser = {
             fullName: 'Gandalf Stormcrow',
@@ -155,12 +155,12 @@ describe(`'PATCH' Method /users`, () => {
         await request(app)
             .post('/users')
             .send(updatedUser)
-            .expect(201)
+            .expect(200)
             .expect('content-type', 'application.json; charset=utf-8');
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
-        mockBookService.patchUser
-            .mockImplementation(() => ({}));
+        mockUserService.patchUser
+            .mockImplementation( async () => {throw new Error()});
         
         const updatedUser = {
             fullName: 'Gandalf Stormcrow',
