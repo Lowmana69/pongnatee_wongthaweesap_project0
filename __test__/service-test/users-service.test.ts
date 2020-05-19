@@ -23,7 +23,7 @@ const mockUsersDao = UsersDao as any;
 
 describe('getAllUsers Function', () => {
     test(`'getAllUsers' Function exists`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getAllUsers
             .mockImplementation(() => ([]));
@@ -33,7 +33,7 @@ describe('getAllUsers Function', () => {
         expect(result).toBeDefined();
     });
     test(`'getAllUsers' should return an array`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getAllUsers
             .mockImplementation(() => ([]));
@@ -48,7 +48,7 @@ describe('getAllUsers Function', () => {
         }
     });
     test(`'getAllUsers' should NOT contain an object`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getAllUsers
             .mockImplementation(() => ([]));
@@ -69,7 +69,7 @@ describe('getAllUsers Function', () => {
 describe('getUserById Function', () => {
     test(`'getUserById' Function exists`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getUserById
             .mockImplementation(() => ({}));
@@ -84,7 +84,7 @@ describe('getUserById Function', () => {
         }
     });
     test(`'getUserById' should contain a Record at ID #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getUserById
             .mockImplementation(() => ({}));
@@ -99,7 +99,7 @@ describe('getUserById Function', () => {
         }
     });
     test(`'getUserById' should NOT contain a Record with ID #366`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getUserById
             .mockImplementation(() => ({}));
@@ -120,7 +120,7 @@ describe('getUserById Function', () => {
 describe('getUserByRatings Function', () => {
     test(`'getUserByRatings' Function exists`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getUserByRatings
             .mockImplementation(() => ([]));
@@ -136,7 +136,7 @@ describe('getUserByRatings Function', () => {
     });
     test(`'getUserByRatings' should contain Users with # of Ratings`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(2);
 
         mockUsersDao.getUserByRatings
             .mockImplementation(() => ({}));
@@ -151,7 +151,7 @@ describe('getUserByRatings Function', () => {
         }
     });
     test(`'getUserByRatings' should NOT contain a User(s) with this # of Ratings`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.getUserByRatings
             .mockImplementation(() => ({}));
@@ -218,7 +218,7 @@ describe('createNewUser Function', () => {
         expect(result.deathBy).not.toBeDefined();
     });
     test(`A '422' Error should return if no Handler Input is provided`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockUsersDao.createNewUser
             .mockImplementatin(() => ({}));

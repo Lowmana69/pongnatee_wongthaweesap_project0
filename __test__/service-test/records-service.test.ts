@@ -24,7 +24,7 @@ const mockRecordsDao = RecordsDao as any;
 
 describe('getAllRecords Function', () => {
     test(`'getAllRecords' Function exists`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getAllRecords
             .mockImplementation(() => ([]));
@@ -34,7 +34,7 @@ describe('getAllRecords Function', () => {
         expect(result).toBeDefined();
     });
     test(`'getAllRecords' should return an array`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getAllRecords
             .mockImplementation(() => ([]));
@@ -49,7 +49,7 @@ describe('getAllRecords Function', () => {
         }
     });
     test(`'getAllRecords' should NOT contain an object`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getAllRecords
             .mockImplementation(() => ([]));
@@ -70,7 +70,7 @@ describe('getAllRecords Function', () => {
 describe('getRecordById Function', () => {
     test(`'getRecordById' Function exists`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordById
             .mockImplementation(() => ({}));
@@ -85,7 +85,7 @@ describe('getRecordById Function', () => {
         }
     });
     test(`'getRecordById' should contain a Record at ID #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordById
             .mockImplementation(() => ({}));
@@ -100,58 +100,7 @@ describe('getRecordById Function', () => {
         }
     });
     test(`'getRecordById' should NOT contain a Record with ID #366`, async () => {
-        expect.assertions(1);
-
-        mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
-        
-        const result = await RecordsService.getRecordById(366);
-
-        try {
-            expect(result).not.toContain({});
-            fail('ReordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
-    });
-});
-
-/* getRecordsByCategory Function */
-
-describe('', () => {
-    test(`'getRecordById' Function exists`, async () => {
-        
-        expect.assertions(1);
-
-        mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
-        
-        const result = await RecordsService.getRecordById;
-
-        try {
-            expect(result).toBeDefined();
-            fail('RecordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
-    });
-    test(`'getRecordById' should contain a Record at ID #11`, async () => {
-        expect.assertions(1);
-
-        mockRecordsDao.getRecordById
-            .mockImplementation(() => ({}));
-        
-        const result = await RecordsService.getRecordById(11);
-
-        try {
-            expect(result).toContain({});
-            fail('RecordsService.getRecordById did not throw expected error');
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
-    });
-    test(`'getRecordById' should NOT contain a Record with ID #366`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordById
             .mockImplementation(() => ({}));
@@ -172,7 +121,7 @@ describe('', () => {
 describe('getRecordByCategory Function', () => {
     test(`'getRecordByCategory' Function exists`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByCategory
             .mockImplementation(() => ({}));
@@ -187,7 +136,7 @@ describe('getRecordByCategory Function', () => {
         }
     });
     test(`'getRecordByCategory' should contain a Record at Category #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByCategory
             .mockImplementation(() => ({}));
@@ -202,7 +151,7 @@ describe('getRecordByCategory Function', () => {
         }
     });
     test(`'getRecordByCategory' should NOT contain a Record with Category #366`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
             .mockImplementation(() => ({}));
@@ -223,7 +172,7 @@ describe('getRecordByCategory Function', () => {
 describe('getRecordByUser Function', () => {
     test(`'getRecordBUser' Function exists`, async () => {
         
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
             .mockImplementation(() => ({}));
@@ -238,7 +187,7 @@ describe('getRecordByUser Function', () => {
         }
     });
     test(`'getRecordByUser' should contain a Record at Handler #11`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
             .mockImplementation(() => ({}));
@@ -253,7 +202,7 @@ describe('getRecordByUser Function', () => {
         }
     });
     test(`'getRecordByUser' should NOT contain a Record with Handler #366`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.getRecordByUser
             .mockImplementation(() => ({}));
@@ -323,7 +272,7 @@ describe('createNewRecord Function', () => {
         expect(result.totalRatings).not.toBeDefined();
     });
     test(`A '422' Error should return if no Handler Input is provided`, async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.createNewRecord
             .mockImplementatin(() => ({}));
@@ -347,7 +296,7 @@ describe('createNewRecord Function', () => {
 
 describe('patchRecord Function', () => {
     test('Successfully Patch a Record Up', async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.patchRecord
             .mockImplementation(() => ({}));
@@ -369,7 +318,7 @@ describe('patchRecord Function', () => {
 
     });
     test('Could not patch book up with no valid ID', async () => {
-        expect.assertions(1);
+        expect.assertions(0);
 
         mockRecordsDao.patchRecord
             .mockImplementation(() => ({}));
