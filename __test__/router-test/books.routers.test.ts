@@ -51,7 +51,7 @@ describe(`'GET' Method /booka`, () => {
 
 describe(`'GET' Method /books/id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockBookService.getBookByID
+        mockBookService.getBookById
             .mockImplementation(async () => ({}));
 
         await request(app)
@@ -60,7 +60,7 @@ describe(`'GET' Method /books/id`, () => {
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockBookService.getBookByID
+        mockBookService.getBookById
             .mockImplementation(async () => ({}));
 
         await request(app)
@@ -68,7 +68,7 @@ describe(`'GET' Method /books/id`, () => {
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockBookService.getBookByID
+        mockBookService.getBookById
             .mockImplementation(async () => ({}));
 
         await request(app)
@@ -184,6 +184,7 @@ describe(`'PATCH' Method /books`, () => {
             .mockImplementation(async () => ({}));
         
         const updatedBook = {
+            id: 34,
             title: 'Diary of Anne Frank',
             author: 4,
             genre: 5,

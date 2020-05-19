@@ -56,7 +56,7 @@ booksRouter.get('/:id', (request, response, next) => {
 // TODO: Check the logic out
 booksRouter.get('/:genre', (request, response, next) => {
     const genre = +request.params.genre;
-    booksService.getBookById(genre)
+    booksService.getBookByGenre(genre)
         .then(genre => {
             if (!genre) {
                 response.sendStatus(404);

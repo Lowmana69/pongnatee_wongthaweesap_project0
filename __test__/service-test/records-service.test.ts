@@ -1,7 +1,7 @@
 /* Import Modules */
 
-import * as recordService from '../../src/services/records-service';
-import * as recordDao from '../../src/daos/users-dao';
+import * as RecordsService from '../../src/services/records-service';
+import * as RecordsDao from '../../src/daos/users-dao';
 import { Record } from '../../src/models/Record';
 
 /*  */
@@ -16,167 +16,327 @@ const closeDatabase = () => console.log('Database Closed...');
 
 jest.mock('../../src/daos/records-dao');
 
+/*  */
+
+const mockRecordsDao = RecordsDao as any;
+
 /* getAllRecords Function */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe('getAllRecords Function', () => {
+    test(`'getAllRecords' Function exists`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getAllRecords
+            .mockImplementation(() => ([]));
+        
+        const result = await RecordsService.getAllRecords();
+
+        expect(result).toBeDefined();
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'getAllRecords' should return an array`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getAllRecords
+            .mockImplementation(() => ([]));
+        
+        const result = await RecordsService.getAllRecords();
+
+        try {
+            expect(result).toContain([]);
+            fail('RecordsService.getAllRecords did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'getAllRecords' should NOT contain an object`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getAllRecords
+            .mockImplementation(() => ([]));
+        
+        const result = await RecordsService.getAllRecords();
+
+        try {
+            expect(result).not.toContain({});
+            fail('RecordsService.getAllRecords did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
 });
 
 /* getRecordByID Function */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe('getRecordById Function', () => {
+    test(`'getRecordById' Function exists`, async () => {
+        
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById;
+
+        try {
+            expect(result).toBeDefined();
+            fail('RecordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'getRecordById' should contain a Record at ID #11`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById(11);
+
+        try {
+            expect(result).toContain({});
+            fail('RecordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'getRecordById' should NOT contain a Record with ID #366`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById(366);
+
+        try {
+            expect(result).not.toContain({});
+            fail('ReordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
 });
 
 /* getRecordsByCategory Function */
 
 describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+    test(`'getRecordById' Function exists`, async () => {
+        
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById;
+
+        try {
+            expect(result).toBeDefined();
+            fail('RecordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'getRecordById' should contain a Record at ID #11`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById(11);
+
+        try {
+            expect(result).toContain({});
+            fail('RecordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'getRecordById' should NOT contain a Record with ID #366`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordById
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordById(366);
+
+        try {
+            expect(result).not.toContain({});
+            fail('ReordsService.getRecordById did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
 });
 
-/* getRecordsByNumbers */
+/* getRecordsByCategory */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe('getRecordByCategory Function', () => {
+    test(`'getRecordByCategory' Function exists`, async () => {
+        
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByCategory
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByCategory;
+
+        try {
+            expect(result).toBeDefined();
+            fail('RecordsService.getRecordByCategory did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'getRecordByCategory' should contain a Record at Category #11`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByCategory
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByCategory(11);
+
+        try {
+            expect(result).toContain({});
+            fail('RecordsService.getRecordByCategory did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'getRecordByCategory' should NOT contain a Record with Category #366`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByUser
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByCategory(366);
+
+        try {
+            expect(result).not.toContain({});
+            fail('ReordsService.getRecordByCategory did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
 });
 
 /* getRecordByUser Function */
 
-describe('', () => {
-    test('should ', () => {
-        expect().toBeDefined();
+describe('getRecordByUser Function', () => {
+    test(`'getRecordBUser' Function exists`, async () => {
+        
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByUser
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByUser;
+
+        try {
+            expect(result).toBeDefined();
+            fail('RecordsService.getRecordByUser did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().toEqual();
+    test(`'getRecordByUser' should contain a Record at Handler #11`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByUser
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByUser(11);
+
+        try {
+            expect(result).toContain({});
+            fail('RecordsService.getRecordByUser did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
-    test('should ', () => {
-        expect().not.toEqual();
-    });
-    test('should ', () => {
-        expect()
+    test(`'getRecordByUser' should NOT contain a Record with Handler #366`, async () => {
+        expect.assertions(1);
+
+        mockRecordsDao.getRecordByUser
+            .mockImplementation(() => ({}));
+        
+        const result = await RecordsService.getRecordsByUser(366);
+
+        try {
+            expect(result).not.toContain({});
+            fail('ReordsService.getRecordByUser did not throw expected error');
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
     });
 });
 
 /* createNewRecord Function */
 
-describe('', () => {
-    test('New Input Object should create a new Book Object', async () => {
-        mockBooksDao.createNewBook
+describe('createNewRecord Function', () => {
+    test('New Input Object should create a new Record Object', async () => {
+        mockRecordsDao.createNewRecord
             .mockImplementation(object => object);
 
-        const newBook = {
-            title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
-            isAvailable: true,
-            currentStatus: 1
+        const newRecord = {
+            mediatitle: '10,000 Leagues Under the Sea',
+            category: 1,
+            handler: 45,
+            recommendation: 1
         };
 
-        const result = await booksService.createNewBook(newBook);
+        const result = await RecordsService.createNewRecord(newRecord);
 
-        expect(newBook).not.toBeInstanceOf(Book);
-        expect(result).toBeInstanceOf(Book);
+        expect(newRecord).not.toBeInstanceOf(Record);
+        expect(result).toBeInstanceOf(Record);
     });
     test('Input ID value should not be pass test', async () => {
-        mockBooksDao.createNewBook
+        mockRecordsDao.createNewRecord
             .mockImplementation(object => object);
 
-        const newBook = {
+        const newRecord = {
             id: 23,
-            title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
-            isAvailable: true,
-            currentStatus: 1
+            mediatitle: '10,000 Leagues Under the Sea',
+            category: 1,
+            handler: 45,
+            recommendation: 1
         };
 
-        const result = await booksService.createNewBook(newBook);
+        const result = await RecordsService.createNewRecord(newRecord);
 
-        expect(result.id).not.toBe(newBook.id);
+        expect(result.id).not.toBe(newRecord.id);
         expect(result.id).not.toBeTruthy();
     });
     test('Extra properties should not be able to pass', async () => {
-        mockBooksDao.createNewBook
+        mockRecordsDao.createNewRecord
             .mockImplementation(object => object);
 
-        const newBook = {
-            title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
-            isAvailable: true,
-            currentStatus: 1,
-            publisher: 'Penguin Press'
+        const newRecord = {
+            mediatitle: '10,000 Leagues Under the Sea',
+            category: 1,
+            handler: 45,
+            recommendation: 1,
+            totalRatings: 10
         };
 
-        const result = await booksService.createNewBook(newBook) as any;
+        const result = await RecordsService.createNewRecord(newRecord) as any;
 
-        expect(result.publisher).not.toBeInstanceOf(Book);
-        expect(result.publisher).not.toBeDefined();
+        expect(result.totalRatings).not.toBeInstanceOf(Record);
+        expect(result.totalRatings).not.toBeDefined();
     });
-    test(`A '422' Error should return if no Genre Input is provided`, async () => {
+    test(`A '422' Error should return if no Handler Input is provided`, async () => {
         expect.assertions(1);
 
-        mockBooksDao.createNewBook
+        mockRecordsDao.createNewRecord
             .mockImplementatin(() => ({}));
         
-        const newBook = {
-            title: 'Diary of Anne Frank',
-            author: 3,
-            totalRatings: 0,
-            isAvailable: true,
-            currentStatus: 1
+        const newRecord = {
+            mediatitle: '10,000 Leagues Under the Sea',
+            category: 1,
+            recommendation: 1
         };
 
         try {
-            await booksService.createNewBook(newBook);
-            fail('booksService.createNewBook did not throw expected error');
+            await RecordsService.createNewRecord(newRecord);
+            fail('RecordsService.createNewRecord did not throw expected error');
         } catch (error) {
             expect(error).toBeDefined();
         }
@@ -185,22 +345,24 @@ describe('', () => {
 
 /* patchRecord Function */
 
-describe('', () => {
-    test('Successfully Patch a Book Up', async () => {
+describe('patchRecord Function', () => {
+    test('Successfully Patch a Record Up', async () => {
         expect.assertions(1);
 
-        mockBooksDao.patchBook
+        mockRecordsDao.patchRecord
             .mockImplementation(() => ({}));
 
-        const patchBook = {
+        const patchRecord = {
             id: 13,
             title: 'The Power of Habits',
-            genre: 17
+            handler: 23,
+            category: 1,
+            recommendation: 4
         };
 
         try {
-            await booksService.patchBook(patchBook);
-            expect(result).toBeTruthy();
+            await RecordsService.patchRecord(patchRecord);
+            expect(patchRecord).toBeTruthy();
         } catch (error) {
             expect(error).toBeTruthy();
         }
@@ -209,17 +371,16 @@ describe('', () => {
     test('Could not patch book up with no valid ID', async () => {
         expect.assertions(1);
 
-        mockBooksDao.patchBook
+        mockRecordsDao.patchRecord
             .mockImplementation(() => ({}));
 
-        const patchBook = {
+        const patchRecord = {
             title: 'The Power of Habits',
-            genre: 17,
-            author: 5
+            handler: 23
         };
 
         try {
-            await booksService.patchBook(patchBook);
+            await RecordsService.patchRecord(patchRecord);
         } catch (error) {
             expect(error).toBeTruthy();
         }

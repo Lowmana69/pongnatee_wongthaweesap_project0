@@ -48,7 +48,9 @@ export function getBookByGenre (genre: number): Promise<Book> {
 
 export function getBookByFirstLetter (title: string): Promise<Book> {
     
-    const sql = `SELECT * FROM books WHERE title LIKE '%%'`;
+    const paramquery = /^[a-zA-Z].*/
+
+    const sql = `SELECT * FROM books WHERE title LIKE 'T%`;
     
     return db.query<BookRow>(sql, [title])
         .then(result => result.rows.map(row => Book.from(row))[0]);
