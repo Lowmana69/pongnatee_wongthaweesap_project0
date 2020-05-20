@@ -214,7 +214,7 @@ describe(`'PATCH' Method /records` , () => {
             .mockImplementation( async () => ({}));
         
         const updatedRecord = {
-            id: 100,
+            id: 23,
             mediatitle: 'Journey To The West',
             totalratings: 12,
             category: 2,
@@ -226,6 +226,7 @@ describe(`'PATCH' Method /records` , () => {
             .send(updatedRecord)
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
+
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockRecordService.patchRecord

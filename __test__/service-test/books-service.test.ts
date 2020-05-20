@@ -72,7 +72,7 @@ describe('getBookById Function', () => {
 
         expect(result).toBeDefined();
     });
-    test(`'getBookByID' should contain a Book at ID #11`, async () => {
+    test(`'getBookById' should contain a Book at ID #11`, async () => {
         expect.assertions(1);
 
         mockBookDao.getBookById
@@ -82,7 +82,7 @@ describe('getBookById Function', () => {
 
         expect(result).toBeTruthy();
     });
-    test(`'getBookByID' should NOT contain a Book with ID #366`, async () => {
+    test(`'getBookById' should NOT contain a Book with ID #366`, async () => {
         expect.assertions(1);
 
         mockBookDao.getBookById
@@ -179,11 +179,11 @@ describe('createNewBook Function', () => {
 
         const newBook = {
             title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
+            author: '3',
+            genre: '2',
+            totalRatings: '0',
             isAvailable: true,
-            currentStatus: 1
+            currentStatus: '1'
         }; 
 
         const result = await BooksService.createNewBook(newBook);
@@ -197,13 +197,13 @@ describe('createNewBook Function', () => {
             .mockImplementation(object => object);
 
         const newBook = {
-            id: 23,
+            id: '23',
             title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
+            author: '3',
+            genre: '2',
+            totalRatings: '0',
             isAvailable: true,
-            currentStatus: 1
+            currentStatus: '1'
         };
 
         const result = await BooksService.createNewBook(newBook);
@@ -218,11 +218,11 @@ describe('createNewBook Function', () => {
 
         const newBook = {
             title: 'The Diary of Anne Frank',
-            author: 3,
-            genre: 2,
-            totalRatings: 0,
+            author: "3",
+            genre: "2",
+            totalRatings: "0",
             isAvailable: true,
-            currentStatus: 1,
+            currentStatus: '1',
             publisher: 'Penguin Press'
         };
 

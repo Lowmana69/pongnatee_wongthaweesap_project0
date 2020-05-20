@@ -153,7 +153,7 @@ describe('createNewUser Function', () => {
                 id: 12,
                 fullName: 'Gollum',
                 handler: 'Precious',
-                totalRatings: 0
+                totalRatings: '0'
             };
 
         const result = await UsersService.createNewUser(newUser);

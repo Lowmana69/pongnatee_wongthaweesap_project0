@@ -4,7 +4,7 @@
   "description": "Project 0 - Revature",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose && jest --watchAll && jest --coverage",
+    "test": "jest --verbose && jest --coverage",
     "start": "nodemon ./src/app.ts"
   },
   "repository": {

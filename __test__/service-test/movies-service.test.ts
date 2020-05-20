@@ -28,7 +28,7 @@ describe('getAllMovies Function', () => {
 
         mockMoviesDao.getAllMovies
             .mockImplementation( async () => ([]));
-        
+
         const result = await MoviesService.getAllMovies();
 
         expect(result).toBeDefined();
@@ -38,7 +38,7 @@ describe('getAllMovies Function', () => {
 
         mockMoviesDao.getAllMovies
             .mockImplementation( async () => ([]));
-        
+
         const result = await MoviesService.getAllMovies();
 
         expect(result).toBeTruthy();
@@ -140,11 +140,11 @@ describe('createNewMovie', () => {
 
         const newMovie = {
             title: 'Diary of Tootsie',
-            yearRelease: 7,
-            genre: 4,
-            totalRatings: 0,
+            yearRelease: '7',
+            genre: '4',
+            totalRatings: '0',
             isAvailable: true,
-            currentStatus: 1
+            currentStatus: '1'
         };
 
         const result = await MoviesService.createNewMovie(newMovie);
@@ -157,13 +157,13 @@ describe('createNewMovie', () => {
             .mockImplementation(object => object);
 
         const newMovie = {
-            id: 23,
+            id: '23',
             title: 'Diary of Tootsie',
-            yearRelease: 7,
-            genre: 4,
-            totalRatings: 0,
+            yearRelease: '7',
+            genre: '4',
+            totalRatings: '0',
             isAvailable: true,
-            currentStatus: 1
+            currentStatus: '1'
         };
 
         const result = await MoviesService.createNewMovie(newMovie);
@@ -176,11 +176,11 @@ describe('createNewMovie', () => {
 
         const newMovie = {
             title: 'Diary of Tootsie',
-            yearRelease: 7,
-            genre: 4,
-            totalRatings: 0,
+            yearRelease: '7',
+            genre: '4',
+            totalRatings: '0',
             isAvailable: true,
-            currentStatus: 1,
+            currentStatus: '1',
             origin: 'Thailand'
         };
 

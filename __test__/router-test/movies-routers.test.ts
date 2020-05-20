@@ -184,7 +184,7 @@ describe(`'PATCH' Method /movies`, () => {
             .mockImplementation( async () => ({}));
 
         const updatedMovie = {
-            id: 15,
+            id: 11,
             title: 'Godzilla',
             yearRelease: 6,
             genre: 4,
@@ -196,8 +196,8 @@ describe(`'PATCH' Method /movies`, () => {
         await request(app)
             .patch('/movies')
             .send(updatedMovie)
-            .expect(200)
-            .expect('content-type', 'application/json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8')
+            .expect(200);
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockMovieService.patchMovie
