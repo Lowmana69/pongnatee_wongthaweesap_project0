@@ -5,7 +5,7 @@ import request from 'supertest';
 import * as recordsService from '../../src/services/records-service';
 import { recordsRouter } from '../../src/routers/records-router';
 
-/*  */
+/* Setup And Teardown */
 
 beforeAll(() => initDatabase());
 afterAll(() => closeDatabase());
@@ -15,7 +15,7 @@ const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 
-jest.mock('../../src/daos/records-dao');
+jest.mock('../../src/services/records-service.ts');
 
 const mockRecordService = recordsService as any
 
@@ -39,28 +39,28 @@ describe(`'GET' Method /records`, () => {
     });
     test(`'GET' request should 500 Status Code from a Bad Request`, async () => {
         mockRecordService.getAllRecords
-            .mockImplementation( async () => {throw new Error()};
+            .mockImplementation( async () => {throw new Error()});
 
         await request(app)
             .get('/records')
-            .expect(200);
+            .expect(500);
     });
 });
 
 /* getRecordByID Function */
 
-describe(`'GET' Method /records/id`, () => {
+describe(`'GET' Method /records/:id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockRecordService.getRecordByID
+        mockRecordService.getRecordById
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/records/1')
+            .get('/records/125')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockRecordService.getRecordByID
+        mockRecordService.getRecordById
             .mockImplementation( async () => (0));
 
         await request(app)
@@ -68,101 +68,102 @@ describe(`'GET' Method /records/id`, () => {
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockRecordService.getRecordByID
+        mockRecordService.getRecordById
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/records/undefined')
+            .get('/records/')
             .expect(500);
     });
 });
 
 /* getRecordsByCategory Function */
 
-describe(`'GET' Method /records/category`, () => {
+describe(`'GET' Method /records/category/:category`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockRecordService.getRecordByCategory
+        mockRecordService.getRecordsByCategory
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/records/5')
+            .get('/records/category/1')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockRecordService.getRecordByCategory
+        mockRecordService.getRecordsByCategory
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get('/records/465')
+            .get('/records//category/465')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockRecordService.getRecordByCategory
+        mockRecordService.getRecordsByCategory
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/records/undefined')
+            .get('/records/category/')
             .expect(500);
     });
 });
 
 /* getRecordsByNumbers */
 
-describe(`'GET' Method /records/recommendation`, () => {
+describe(`'GET' Method /records/recommendation/:recommendation`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockRecordService.getRecordByNumbers
+        
+        mockRecordService.getRecordsByRecommnedation
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/records/1')
+            .get('/records/recommendation/110')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockRecordService.getRecordByNumbers
+        mockRecordService.getRecordsByRecommnedation
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get('/records/45')
+            .get('/records/recommendation/4500')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockRecordService.getRecordByNumbers
+        mockRecordService.getRecordsByRecommnedation
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/records/unknown')
+            .get('/records/recommendation/')
             .expect(500);
     });
 });
 
 /* getRecordByUser Function */
 
-describe(`'GET' Method /records/handler`, () => {
+describe(`'GET' Method /records/handler/:handler`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
-        mockRecordService.getRecordByUser
+        mockRecordService.getRecordsByUser
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/records/54')
+            .get('/records/handler/50')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'GET' request should return a 404 Status Code if JSON File is Not Found`, async () => {
-        mockRecordService.getRecordByUser
+        mockRecordService.getRecordsByUser
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get('/records/300')
+            .get('/records/handler/300')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockRecordService.getRecordByUser
+        mockRecordService.getRecordsByUser
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/records/uncategorized')
+            .get('/records/handler/')
             .expect(500);
     });
 });
@@ -185,7 +186,7 @@ describe(`'POST' Method /records`, () => {
             .post('/records')
             .send(newRecord)
             .expect(201)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
         mockRecordService.createNewRecord
@@ -213,17 +214,18 @@ describe(`'PATCH' Method /records` , () => {
             .mockImplementation( async () => ({}));
         
         const updatedRecord = {
+            id: 100,
             mediatitle: 'Journey To The West',
-            totalRatings: 12,
+            totalratings: 12,
             category: 2,
-            recommedation: 4
+            recommendation: 4
         };
 
         await request(app)
-            .post('/records')
+            .patch('/records')
             .send(updatedRecord)
             .expect(200)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockRecordService.patchRecord
@@ -237,7 +239,7 @@ describe(`'PATCH' Method /records` , () => {
         };
 
         await request(app)
-            .post('/records')
+            .patch('/records')
             .send(updatedRecord)
             .expect(500);
     });

@@ -40,22 +40,30 @@ export function getRecordById(id: number): Promise<Record> {
 
 /* Read / Retrieve All Records By Category */
 
-export function getRecordByCategory(category: number): Promise<Record> {
+export function getRecordsByCategory(category: number): Promise<Record[]> {
     
     const sql = 'SELECT * FROM records WHERE category = $1';
     
     return db.query<RecordRow> (sql, [category])
-        .then(result => result.rows.map(row => Record.from(row))[0]);
+        .then(result => {
+            const rows: RecordRow[]= result.rows;
+            const record: Record[] = rows.map(row => Record.from(row));
+            return record; 
+        });
 }
 
 /* Read / Retrieve Records By Number of Ratings */
 
-export function getRecordsByNumbers(recommendation: number): Promise<Record> {
+export function getRecordsByRecommnedation(recommendation: number): Promise<Record[]> {
     
-    const sql = 'SELECT * FROM records WHERE recommendation = $1 LIMIT 5';
+    const sql = 'SELECT * FROM records WHERE recommendation = $1';
     
     return db.query<RecordRow> (sql, [recommendation])
-        .then(result => result.rows.map(row => Record.from(row))[0]);
+        .then(result => {
+            const rows: RecordRow[]= result.rows;
+            const record: Record[] = rows.map(row => Record.from(row));
+            return record; 
+        });
 }
 
 /* Read / Retrive Records By A Single User */

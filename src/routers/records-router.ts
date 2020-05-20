@@ -54,7 +54,7 @@ recordsRouter.get('/:id', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-recordsRouter.get('/:category', (request, response, next) => {
+recordsRouter.get('/category/:category', (request, response, next) => {
     const category = +request.params.category;
     recordsService.getRecordsByCategory(category)
         .then(category => {
@@ -76,9 +76,9 @@ recordsRouter.get('/:category', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-recordsRouter.get('/:recommendations', (request, response, next) => {
+recordsRouter.get('/recommendation/:recommendation', (request, response, next) => {
     const recommendation = +request.params.recommendation;
-    recordsService.getRatingsByNumbers(recommendation)
+    recordsService.getRecordsByRecommnedation(recommendation)
         .then(recommendation => {
             if (!recommendation) {
                 response.sendStatus(404);
@@ -98,7 +98,7 @@ recordsRouter.get('/:recommendations', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-recordsRouter.get('/:handler', (request, response, next) => {
+recordsRouter.get('/handler/:handler', (request, response, next) => {
     const handler = +request.params.handler;
     recordsService.getRecordsByUser(handler)
         .then(handler => {

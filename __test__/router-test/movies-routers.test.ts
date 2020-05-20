@@ -5,7 +5,7 @@ import request from 'supertest';
 import * as moviesService from '../../src/services/movies-service';
 import { moviesRouter } from '../../src/routers/movies-router';
 
-/*  */
+/* Setup And Teardown */
 
 beforeAll(() => initDatabase());
 afterAll(() => closeDatabase());
@@ -15,7 +15,7 @@ const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 
-jest.mock('../../src/daos/movies-dao');
+jest.mock('../../src/services/movies-service.ts');
 
 const mockMovieService = moviesService as any
 
@@ -49,13 +49,13 @@ describe(`'GET' Method /movies`, () => {
 
 /* getMovieByID Function */
 
-describe(`'GET' Method /users/id`, () => {
+describe(`'GET' Method /movies/:id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockMovieService.getMovieById
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/movies/1')
+            .get('/movies/100')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
@@ -72,20 +72,20 @@ describe(`'GET' Method /users/id`, () => {
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/movie/undefined')
+            .get('/movies')
             .expect(500);
     });
 });
 
 /* getMovieByGenre Function */
 
-describe(`'GET' Method /movies/genre`, () => {
+describe(`'GET' Method /movies/genre/:genre`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockMovieService.getMovieByGenre
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/movies/3')
+            .get('/movies/genre/3')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
@@ -94,7 +94,7 @@ describe(`'GET' Method /movies/genre`, () => {
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get('/movies/465')
+            .get('/movies/genre/465')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
@@ -102,20 +102,20 @@ describe(`'GET' Method /movies/genre`, () => {
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/movie/null')
+            .get('/movies')
             .expect(500);
     });
 });
 
 /* getMovieByFirstLetter Function */
 
-describe(`'GET' Method /movies/title`, () => {
+describe(`'GET' Method /movies/title/:title`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockMovieService.getMovieByFirstLetter
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get(`/movies/'T'`)
+            .get(`/movies/title/'T'`)
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
@@ -124,7 +124,7 @@ describe(`'GET' Method /movies/title`, () => {
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get(`/movies/'Z'`)
+            .get(`/movies/title/'Z'`)
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
@@ -132,12 +132,10 @@ describe(`'GET' Method /movies/title`, () => {
             .mockImplementation( async () => {throw new Error()});
             
         await request(app)
-            .get('/movie/452')
+            .get('/movies')
             .expect(500);
     });
 });
-
-/
 
 /* createNewMovie Function */
 
@@ -159,7 +157,7 @@ describe(`'POST' Method /movies`, () => {
             .post('/movies')
             .send(newMovie)
             .expect(201)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
         mockMovieService.createNewMovie
@@ -172,7 +170,7 @@ describe(`'POST' Method /movies`, () => {
         };
 
         await request(app)
-            .post('/books')
+            .post('/movies')
             .send(newMovie)
             .expect(500);
     });
@@ -184,8 +182,9 @@ describe(`'PATCH' Method /movies`, () => {
     test(`'PATCH' should return a 200 Status Code for Patching Up a Movie`, async () => {
         mockMovieService.patchMovie
             .mockImplementation( async () => ({}));
-        
+
         const updatedMovie = {
+            id: 15,
             title: 'Godzilla',
             yearRelease: 6,
             genre: 4,
@@ -195,10 +194,10 @@ describe(`'PATCH' Method /movies`, () => {
         };
 
         await request(app)
-            .post('/movies')
+            .patch('/movies')
             .send(updatedMovie)
             .expect(200)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockMovieService.patchMovie
@@ -211,7 +210,7 @@ describe(`'PATCH' Method /movies`, () => {
         };
 
         await request(app)
-            .post('/books')
+            .patch('/movies')
             .send(updatedMovie)
             .expect(500);
     });

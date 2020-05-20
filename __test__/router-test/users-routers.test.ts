@@ -5,7 +5,7 @@ import request from 'supertest';
 import * as usersService from '../../src/services/users-service';
 import { usersRouter } from '../../src/routers/users-router';
 
-/*  */
+/* Setup And Teardown */
 
 beforeAll(() => initDatabase());
 afterAll(() => closeDatabase());
@@ -15,7 +15,7 @@ const closeDatabase = () => console.log('Database Closed...');
 
 /* Mock */
 
-jest.mock('../../src/daos/users-dao');
+jest.mock('../../src/services/users-service.ts');
 
 const mockUserService = usersService as any
 
@@ -49,12 +49,12 @@ describe(`'GET' Method /users`, () => {
 
 /* getUserByID Function */
 
-describe(`'GET' Method /users/id`, () => {
+describe(`'GET' Method /users/:id`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockUserService.getUserById
             .mockImplementation( async () => ({}));
         await request(app)
-            .get('/users/1')
+            .get('/users/28')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
@@ -69,20 +69,20 @@ describe(`'GET' Method /users/id`, () => {
         mockUserService.getUserById
             .mockImplementation( async () => {throw new Error()});
         await request(app)
-            .get('/users/undefined')
+            .get('/users')
             .expect(500);
     });
 });
 
 /* getUserByRatings Function */
 
-describe(`'GET' Method /users/totalratings`, () => {
+describe(`'GET' Method /users/ratings/:totalratings`, () => {
     test(`'GET' request should return a JSON File with 200 Status Code`, async () => {
         mockUserService.getUserByRatings
             .mockImplementation( async () => ({}));
 
         await request(app)
-            .get('/users/52')
+            .get('/users/ratings/52')
             .expect(200)
             .expect('content-type', 'application/json; charset=utf-8');
     });
@@ -91,15 +91,15 @@ describe(`'GET' Method /users/totalratings`, () => {
             .mockImplementation( async () => (0));
 
         await request(app)
-            .get('/users/465')
+            .get('/users/ratings/465')
             .expect(404);
     });
     test(`'GET' request should return a 500 Status Code for Internal Server Error`, async () => {
-        mockUserService.getUserByID
+        mockUserService.getUserByRatings
             .mockImplementation( async () => {throw new Error()});
 
         await request(app)
-            .get('/users/under')
+            .get('/users/ratings')
             .expect(500);
     });
 });
@@ -121,7 +121,7 @@ describe(`'POST' Method /users`, () => {
             .post('/users')
             .send(newUser)
             .expect(201)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'POST' should return a 500 Status Code for Error Encounters`, async () => {
         mockUserService.createNewUser
@@ -145,18 +145,19 @@ describe(`'PATCH' Method /users`, () => {
     test(`'PATCH' should return a 200 Status Code for Sewing Up a User`, async () => {
         mockUserService.patchUser
             .mockImplementation( async () => ({}));
-        
+
         const updatedUser = {
+            id: 50,
             fullName: 'Gandalf Stormcrow',
             handler: 'GandalfTheWhite',
             totalRatings: 52
         };
 
         await request(app)
-            .post('/users')
+            .patch('/users')
             .send(updatedUser)
             .expect(200)
-            .expect('content-type', 'application.json; charset=utf-8');
+            .expect('content-type', 'application/json; charset=utf-8');
     });
     test(`'PATCH' should return a 500 Status Code for Error Encounters`, async () => {
         mockUserService.patchUser
@@ -168,7 +169,7 @@ describe(`'PATCH' Method /users`, () => {
         };
 
         await request(app)
-            .post('/users')
+            .patch('/users')
             .send(updatedUser)
             .expect(500);
     });

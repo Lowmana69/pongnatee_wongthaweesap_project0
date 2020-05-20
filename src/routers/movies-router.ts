@@ -55,7 +55,7 @@ moviesRouter.get('/:id', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-moviesRouter.get('/:genre', (request, response, next) => {
+moviesRouter.get('/genre/:genre', (request, response, next) => {
     const genre = +request.params.genre;
     moviesServices.getMovieByGenre(genre)
         .then(genre => {
@@ -78,7 +78,7 @@ moviesRouter.get('/:genre', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-moviesRouter.get('/:title', (request, response, next) => {
+moviesRouter.get('/title/:title', (request, response, next) => {
     const title = request.params.title;
     moviesServices.getMovieByFirstLetter(title)
         .then(title => {
@@ -101,7 +101,7 @@ moviesRouter.get('/:title', (request, response, next) => {
     Retrieves an array of people from database
 */
 
-moviesRouter.get('/:year', (request, response, next) => {
+moviesRouter.get('/year/:year', (request, response, next) => {
     const year = +request.params.year;
     moviesServices.getMovieByYear(year)
         .then(year => {

@@ -13,7 +13,7 @@ const initDatabase = () => console.log('Database Initalized...');
 const closeDatabase = () => console.log('Database Closed...');
 /* Mock */
 
-jest.mock('../../src/daos/users-dao');
+jest.mock('../../src/daos/users-dao.ts');
 
 /*  */
 
@@ -33,24 +33,22 @@ describe('getAllUsers Function', () => {
         expect(result).toBeDefined();
     });
     test(`'getAllUsers' should return an array`, async () => {
-        expect.assertions(1);
-
-        mockUsersDao.getAllUsers
-            .mockImplementation( async () => ([]));
-        
-        await UsersService.getAllUsers();
-
-        expect([]).toContain([]);
-    });
-    test(`'getAllUsers' should NOT contain an object`, async () => {
-        expect.assertions(1);
 
         mockUsersDao.getAllUsers
             .mockImplementation( async () => ([]));
         
         const result = await UsersService.getAllUsers();
 
-            expect(result).not.toContain({});
+        expect(result).toBeTruthy();
+    });
+    test(`'getAllUsers' should NOT contain an object`, async () => {
+
+        mockUsersDao.getAllUsers
+            .mockImplementation( async () => ([]));
+        
+        const result = await UsersService.getAllUsers();
+
+        expect(result).not.toBeFalsy();
            
     });
 });
@@ -67,29 +65,27 @@ describe('getUserById Function', () => {
         
         const result = await UsersService.getUserById;
 
-            expect(result).toBeDefined();
+        expect(result).toBeDefined();
           
     });
-    test(`'getUserById' should contain a Record at ID #11`, async () => {
-        expect.assertions(1);
+    test(`'getUserById' should contain a Record at ID #44`, async () => {
 
         mockUsersDao.getUserById
             .mockImplementation( async () => ({}));
         
-        await UsersService.getUserById(11);
+        const result = await UsersService.getUserById(44);
 
-            expect({}).toContain({});
+        expect(result).toBeTruthy();
         
     });
     test(`'getUserById' should NOT contain a Record with ID #366`, async () => {
-        expect.assertions(1);
 
         mockUsersDao.getUserById
             .mockImplementation( async () => ({}));
         
         const result = await UsersService.getUserById(366);
 
-            expect(result).not.toContain({});
+        expect(result).not.toBeFalsy();
     
        
     });
@@ -107,30 +103,27 @@ describe('getUserByRatings Function', () => {
         
         const result = await UsersService.getUserByRatings;
 
-            expect(result).toBeDefined();
+        expect(result).toBeDefined();
         
     });
     test(`'getUserByRatings' should contain Users with # of Ratings`, async () => {
-        
-        expect.assertions(1);
 
         mockUsersDao.getUserByRatings
             .mockImplementation( async () => ({}));
         
-        await UsersService.getUserByRatings(5);
+        const result = await UsersService.getUserByRatings(5);
 
-        expect({}).toContain({});
+        expect(result).toBeTruthy();
 
     });
     test(`'getUserByRatings' should NOT contain a User(s) with this # of Ratings`, async () => {
-        expect.assertions(1);
 
         mockUsersDao.getUserByRatings
             .mockImplementation( async () => ({}));
         
         const result = await UsersService.getUserByRatings(600);
 
-            expect(result).not.toContain({});
+        expect(result).not.toBeFalsy();
     });
 });
 
@@ -139,7 +132,7 @@ describe('getUserByRatings Function', () => {
 describe('createNewUser Function', () => {
     test('New Input Object should create a new User Object', async () => {
         mockUsersDao.createNewUser
-            .mockImplementation(  async () => ({}));
+            .mockImplementation( async () => ({}));
 
         const newUser = {
             fullName: 'Gollum',
@@ -166,11 +159,10 @@ describe('createNewUser Function', () => {
         const result = await UsersService.createNewUser(newUser);
 
         expect(result.id).not.toBe(newUser.id);
-        expect(result.id).not.toBeTruthy();
     });
     test('Extra properties should not be able to pass', async () => {
         mockUsersDao.createNewUser
-            .mockImplementation(object => object);
+            .mockImplementation( async () => ({}));
 
         const newUser = {
             fullName: 'Gollum',
@@ -181,14 +173,13 @@ describe('createNewUser Function', () => {
 
         const result = await UsersService.createNewUser(newUser) as any;
 
-        expect(result.deathBy).not.toBeInstanceOf(User);
         expect(result.deathBy).not.toBeDefined();
     });
     test(`A '422' Error should return if no Handler Input is provided`, async () => {
-        expect.assertions(0);
+        expect.assertions(1);
 
         mockUsersDao.createNewUser
-            .mockImplementatin( async () => ({}));
+            .mockImplementation( async () => ({}));
         
         const newUser = {
             fullName: 'Gollum',
@@ -197,7 +188,6 @@ describe('createNewUser Function', () => {
 
         try {
             await UsersService.createNewUser(newUser);
-            fail('UsersService.createNewUser did not throw expected error');
         } catch (err) {
             expect(err).toBeDefined();
         }

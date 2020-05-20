@@ -98,7 +98,7 @@ booksRouter.get('/:title', (request, response, next) => {
     Retrieves an array of people from database
 */
 // TODO: Check the logic out
-booksRouter.get('/:author', (request, response, next) => {
+booksRouter.get('/author/:author', (request, response, next) => {
     const author = +request.params.author;
     booksService.getBookByAuthor(author)
         .then(author => {

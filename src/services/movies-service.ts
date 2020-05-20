@@ -17,7 +17,7 @@ export function getMovieById (id: number): Promise<Movie> {
 
 /* Read / Retrieve Movies By Genre */
 
-export function getMovieByGenre (genre: number): Promise<Movie> {
+export function getMovieByGenre (genre: number): Promise<Movie[]> {
     return moviesDao.getMovieByGenre(genre);
 }
 
@@ -29,7 +29,7 @@ export function getMovieByFirstLetter (title: string): Promise<Movie> {
 
 /* Read / Retrieve Movies By Year Release */
 
-export function getMovieByYear (bydecade: number): Promise<Movie> {
+export function getMovieByYear (bydecade: number): Promise<Movie[]> {
     return moviesDao.getMovieByYear(bydecade);
 }
 

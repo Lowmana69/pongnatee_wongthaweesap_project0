@@ -50,7 +50,7 @@ usersRouter.get('/:id', (request, response, next) => {
 
 /* Read / Retrieve User By Number Of Ratings */
 
-usersRouter.get('/:totalratings', (request, response, next) => {
+usersRouter.get('/ratings/:totalratings', (request, response, next) => {
     const totalratings = +request.params.totalratings;
     usersService.getUserByRatings(totalratings)
         .then(totalratings => {

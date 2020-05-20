@@ -50,7 +50,7 @@ export function patchUser (input: any): Promise<User> {
     );
 
     if (!user.id) {
-        throw new Error('404');
+        throw new Error('400');
     }
 
     return usersDao.patchUser(user);

@@ -63,12 +63,17 @@ export function getBookByFirstLetter (title: string): Promise<Book> {
 
 /* Read / Retrieve Book Titles By Auther */
 
-export function getBookByAuthor (author: number): Promise<Book>{
+export function getBookByAuthor (author: number): Promise<Book[]>{
    
     const sql = 'SELECT * FROM books WHERE author = $1';
     
     return db.query<BookRow>(sql, [author])
-        .then(result => result.rows.map(row => Book.from(row))[0]);
+    .then(result => {
+        const rows: BookRow[] = result.rows;
+
+        const book: Book[] = rows.map(row => Book.from(row));
+        return book;
+    });
 }
 
 /* Create / Post A New book To The Database */

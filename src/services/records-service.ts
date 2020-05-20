@@ -17,14 +17,14 @@ export function getRecordById (id: number): Promise<Record> {
 
 /* Read / Retrieve All Records By Category */
 
-export function getRecordsByCategory (category: number): Promise<Record> {
-    return recordsDao.getRecordByCategory(category);
+export function getRecordsByCategory (category: number): Promise<Record[]> {
+    return recordsDao.getRecordsByCategory(category);
 }
 
 /* Read / Retrieve Records By Total Numbers */
 
-export function getRatingsByNumbers (totalratings: number): Promise<Record> {
-    return recordsDao.getRecordsByNumbers(totalratings);
+export function getRecordsByRecommnedation (recommendation: number): Promise<Record[]> {
+    return recordsDao.getRecordsByRecommnedation(recommendation);
 }
 
 /* Read / Retrieve All Records By A Single User */

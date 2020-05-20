@@ -29,7 +29,7 @@ export function getBookByFirstLetter (title: string): Promise<Book> {
 
 /* Read / Retrieve Books By Author */
 
-export function getBookByAuthor (author: number): Promise<Book> {
+export function getBookByAuthor (author: number): Promise<Book[]> {
     return booksDao.getBookByAuthor(author);
 }
 
