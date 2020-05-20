@@ -132,7 +132,7 @@ moviesRouter.post('', (request, response, next) => {
             response.status(201);
             response.json(newMovie);
             next();
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
             next();
         });
@@ -142,15 +142,16 @@ moviesRouter.post('', (request, response, next) => {
 
 moviesRouter.patch('', (request, response, next) => {
     const movie = request.body;
-    moviesServices.getAllMovies()
+    moviesServices.patchMovie(movie)
         .then(updatedMovie => {
             if (updatedMovie) {
                 response.json(updatedMovie);
             } else {
                 response.sendStatus(404);
             }
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
+        }).finally(() => {
             next();
         });
 });

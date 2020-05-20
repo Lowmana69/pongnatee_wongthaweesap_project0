@@ -249,7 +249,6 @@ describe('createNewRecord Function', () => {
         expect(result.totalRatings).not.toBeDefined();
     });
     test(`A '422' Error should return if no Handler Input is provided`, async () => {
-        expect.assertions(0);
 
         mockRecordsDao.createNewRecord
             .mockImplementation( async () => ({}));

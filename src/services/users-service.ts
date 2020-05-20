@@ -25,15 +25,16 @@ export function getUserByRatings (totalratings: number): Promise<User> {
 
 export function createNewUser (user: any): Promise<User> {
     const newUser = new User (
-        undefined, user.fulllName,
-        user.handler, user.totalRatings
+        undefined, user.fullname,
+        user.handler, user.totalratings
     );
 
     const params = (
-        user.fulllName && user.handler && 
-        user.totalRatings
+        user.fullname, user.handler,
+        user.totalratings
     );
 
+console.log(newUser);
     if (params) {
         return usersDao.createNewUser(newUser);
     } else {
@@ -45,8 +46,8 @@ export function createNewUser (user: any): Promise<User> {
 
 export function patchUser (input: any): Promise<User> {
     const user = new User (
-        input.id, input.fullName,
-        input.handler, input.totalRatings
+        input.id, input.fullname,
+        input.handler, input.totalratings
     );
 
     if (!user.id) {

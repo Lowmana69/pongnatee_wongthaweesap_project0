@@ -38,13 +38,13 @@ export function getBookByAuthor (author: number): Promise<Book[]> {
 export function createNewBook (book: any): Promise<Book> {
     const newBook = new Book(
         undefined, book.title, book.author,
-        book.genre, book.totalRatings, 
-        book.currentStatus, book.isAvailable
+        book.genre, book.totalratings, 
+        book.isavailable, book.currentstatus
     );
 
-    const params = (book.title && book.author &&
-        book.genre && book.totalRatings && 
-        book.currentStatus && book.isAvailable)
+    const params = (book.title, book.author,
+        book.genre, book.totalratings,
+        book.isavailable, book.currentstatus);
     
     if (params) {
         return booksDao.createNewBook(newBook);
@@ -59,8 +59,8 @@ export function patchBook (input: any): Promise<Book> {
     const book = new Book (
         input.id, input.title,
         input.author, input.genre,
-        input.totalRatings, input.isAvailable,
-        input.currentStatus
+        input.totalratings, input.isavailable,
+        input.currentstatus
     );
 
     if (!book.id) {

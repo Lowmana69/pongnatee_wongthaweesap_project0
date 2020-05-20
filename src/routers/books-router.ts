@@ -128,7 +128,7 @@ booksRouter.post('', (request, response, next) => {
             response.status(201);
             response.json(newBook);
             next();
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
             next();
         });
@@ -145,7 +145,7 @@ booksRouter.patch('', (request, response, next) => {
             } else {
                 response.sendStatus(404);
             }
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
             next();
         });

@@ -2,9 +2,9 @@
 
 export class User {
     id:                     number;
-    fullName:               string;
+    fullname:               string;
     handler:                string;
-    totalRatings:           number;
+    totalratings:           number;
 
     /**
      * Static function for creating a Person instance from the structure the
@@ -14,24 +14,24 @@ export class User {
     static from(obj: UserRow): User {
         const user = new User(
             obj.id,
-            obj.fullName,
+            obj.fullname,
             obj.handler,
-            obj.totalRatings
+            obj.totalratings
         );
         return user;
     }
 
     constructor(
     id: number,
-    fullName: string,
+    fullname: string,
     handler: string,
-    totalRatings: number
+    totalratings: number
 
     ) {
         this.id = id;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.handler = handler;
-        this.totalRatings = totalRatings;
+        this.totalratings = totalratings;
     }
 }
 
@@ -39,7 +39,7 @@ export class User {
 
 export interface UserRow {
     id:                     number;
-    fullName:               string;
+    fullname:               string;
     handler:                string;
-    totalRatings:           number;
+    totalratings:           number;
 }

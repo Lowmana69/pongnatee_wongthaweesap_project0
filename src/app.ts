@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 import express from 'express';
+import bodyParser from 'body-parser';
 import { db } from './daos/database';
 import { usersRouter } from '../src/routers/users-router';
 import { moviesRouter } from '../src/routers/movies-router';
@@ -20,7 +21,7 @@ app.set('PORT', PORT);
 
 /* Register Middleware */
 
-app.use(express.json());
+app.use(bodyParser.json());
 
 /* Register Routes Middleware */
 

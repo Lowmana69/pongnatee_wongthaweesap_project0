@@ -128,7 +128,7 @@ recordsRouter.post('', (request, response, next) => {
             response.status(201);
             response.json(newRecord);
             next();
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
             next();
         });
@@ -140,13 +140,14 @@ recordsRouter.patch('', (request, response, next) => {
     const record = request.body;
     recordsService.patchRecord(record)
         .then(updatedRecord => {
-            if (!record) {
+            if (updatedRecord) {
                 response.json(updatedRecord);
             } else {
                 response.sendStatus(404);
             }
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
+        }).finally(() => {
             next();
         });
 });

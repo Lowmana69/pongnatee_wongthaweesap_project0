@@ -79,7 +79,7 @@ usersRouter.post('', (request, response, next) => {
             response.status(201);
             response.json(newUser);
             next();
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
             next();
         });
@@ -91,12 +91,14 @@ usersRouter.patch('', (request, response, next) => {
     const user = request.body;
     usersService.patchUser(user)
         .then(updatedUser => {
-            if (!user) {
+            if (updatedUser) {
                 response.json(updatedUser);
             } else {
                 response.sendStatus(404);
             }
-        }).catch(error => {
+        }).catch(err => {
             response.sendStatus(500);
-        })
+        }).finally(() => {
+            next();
+        });
 });

@@ -37,15 +37,15 @@ export function getMovieByYear (bydecade: number): Promise<Movie[]> {
 
 export function createNewMovie (movie: any): Promise<Movie> {
     const newMovie = new Movie(
-        undefined, movie.title, movie.yearRelease,
-        movie.genre, movie.totalRatings, 
-        movie.currentStatus, movie.isAvailable
+        undefined, movie.title, movie.yearrelease,
+        movie.genre, movie.totalratings,
+        movie.isavailable, movie.currentstatus
     );
 
-    const params = (movie.title && movie.yearRelease &&
-        movie.genre && movie.totalRatings && 
-        movie.currentStatus && movie.isAvailable);
-    
+    const params = (movie.title, movie.yearRelease,
+        movie.genre, movie.totalratings,
+        movie.isavailable, movie.currentstatus);
+    console.log(newMovie);
     if (params) {
         return moviesDao.createNewMovie(newMovie);
     } else {
@@ -58,9 +58,9 @@ export function createNewMovie (movie: any): Promise<Movie> {
 export function patchMovie (input: any): Promise<Movie> {
     const movie = new Movie (
         input.id, input.title,
-        input.author, input.genre,
-        input.totalRatings, input.isAvailable,
-        input.currentStatus
+        input.yearrelease, input.genre,
+        input.totalratings, input.isavailable,
+        input.currentstatus
     );
 
     if (!movie.id) {

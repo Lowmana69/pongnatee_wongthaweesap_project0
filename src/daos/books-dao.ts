@@ -83,7 +83,7 @@ export function createNewBook (book: Book): Promise<Book> {
 	($1, $2, $3, $4, $5, $6) RETURNING *`;
     
     const params = [book.title, book.author, book.genre,
-        book.totalRatings, book.isAvailable, book.currentStatus];
+        book.totalratings, book.isavailable, book.currentstatus];
     
         return db.query<BookRow>(sql, params)
         .then(result => result.rows.map(row => Book.from(row))[0]);
@@ -99,7 +99,7 @@ export function patchBook (book: Book): Promise<Book> {
         currentstatus = COALESCE($6, currentstatus) WHERE id = $7 RETURNING *`;
     
     const params = [book.title, book.author, book.genre,
-        book.totalRatings, book.isAvailable, book.currentStatus];
+        book.totalratings, book.isavailable, book.currentstatus];
     
     return db.query<BookRow>(sql, params)
         .then(result => result.rows.map(row => Book.from(row))[0]);

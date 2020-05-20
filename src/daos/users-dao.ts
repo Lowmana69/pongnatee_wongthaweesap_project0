@@ -52,11 +52,11 @@ export function getUserByRatings(totalratings: number): Promise<User> {
 
 export function createNewUser(user: User): Promise<User> {
     
-    const sql = `INSERT INTO users (fullname, "handler", totalratings) \ 
+    const sql = `INSERT INTO users (fullname, "handler", totalratings) \
         VALUES ($1, $2, $3) RETURNING *`;
     
-    const params = [user.fullName, user.handler,
-        user.totalRatings];
+    const params = [user.fullname, user.handler,
+        user.totalratings];
     
     return db.query<UserRow> (sql, params)
         .then(result => result.rows.map(row => User.from(row))[0]);
@@ -66,12 +66,12 @@ export function createNewUser(user: User): Promise<User> {
 
 export function patchUser(user: User): Promise<User> {
     
-    const sql = `UPDATE users SET fullName = COALESCE($1, fullName ), \
+    const sql = `UPDATE users SET fullname = COALESCE($1, fullname ), \
         "handler" = COALESCE($2, "handler" ), totalratings = COALESCE($3, totalratings) \
         WHERE id = $4 RETURNING *`;
     
-    const params = [user.fullName, user.handler, 
-            user.totalRatings];
+    const params = [user.fullname, user.handler,
+            user.totalratings];
     
     return db.query<UserRow> (sql, params)
         .then(result => result.rows.map(row => User.from(row))[0]);

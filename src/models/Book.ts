@@ -5,9 +5,9 @@ export class Book {
     title:          string;
     author:         number;
     genre:          number;
-    totalRatings:   number;
-    isAvailable:    boolean;
-    currentStatus:  number;
+    totalratings:   number;
+    isavailable:    boolean;
+    currentstatus:  number;
     
     /**
      * Static function for creating a Person instance from the structure the
@@ -17,12 +17,12 @@ export class Book {
     static from(obj: BookRow): Book {
         const book = new Book(
             obj.id,
-            obj.title, 
-            obj.author, 
+            obj.title,
+            obj.author,
             obj.genre,
-            obj.totalRatings,
-            obj.isAvailable,
-            obj.currentStatus
+            obj.totalratings,
+            obj.isavailable,
+            obj.currentstatus
         );
         return book;
     }
@@ -32,17 +32,17 @@ export class Book {
         title: string,
         author: number,
         genre: number,
-        totalRatings: number,
-        isAvailable: boolean,
-        currentStatus: number 
+        totalratings: number,
+        isavailable: boolean,
+        currentstatus: number 
     ) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.totalRatings = totalRatings;
-        this.isAvailable = isAvailable;
-        this.currentStatus = currentStatus;
+        this.totalratings = totalratings;
+        this.isavailable = isavailable;
+        this.currentstatus = currentstatus;
     }
 }
 
@@ -53,7 +53,7 @@ export interface BookRow {
     title:          string;
     author:         number;
     genre:          number;
-    totalRatings:   number;
-    isAvailable:    boolean;
-    currentStatus:  number;
+    totalratings:   number;
+    isavailable:    boolean;
+    currentstatus:  number;
 }

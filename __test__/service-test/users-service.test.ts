@@ -132,12 +132,12 @@ describe('getUserByRatings Function', () => {
 describe('createNewUser Function', () => {
     test('New Input Object should create a new User Object', async () => {
         mockUsersDao.createNewUser
-            .mockImplementation( async () => ({}));
+            .mockImplementation(object => object);
 
         const newUser = {
-            fullName: 'Gollum',
+            fullname: 'Gollum',
             handler: 'Precious',
-            totalRatings: 0
+            totalratings: '0'
         };
 
         const result = await UsersService.createNewUser(newUser);
@@ -150,10 +150,10 @@ describe('createNewUser Function', () => {
             .mockImplementation( async () => ({}));
 
             const newUser = {
-                id: 12,
-                fullName: 'Gollum',
+                id: 2,
+                fullname: 'Gollum',
                 handler: 'Precious',
-                totalRatings: '0'
+                totalratings: 1
             };
 
         const result = await UsersService.createNewUser(newUser);
@@ -165,9 +165,9 @@ describe('createNewUser Function', () => {
             .mockImplementation( async () => ({}));
 
         const newUser = {
-            fullName: 'Gollum',
+            fullname: 'Gollum',
             handler: 'Precious',
-            totalRatings: 0,
+            totalratings: 9,
             deathBy: 'Mount Doom'
         };
 
@@ -180,7 +180,7 @@ describe('createNewUser Function', () => {
 
         mockUsersDao.createNewUser
             .mockImplementation( async () => ({}));
-        
+
         const newUser = {
             fullName: 'Gollum',
             totalRatings: 0

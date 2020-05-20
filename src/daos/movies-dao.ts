@@ -86,8 +86,8 @@ export function createNewMovie(movie: Movie): Promise<Movie> {
 	    ($1, $2, $3, $4, $5, $6) RETURNING *`;
     
     const params = [movie.title, movie.genre,
-        movie.yearRelease, movie.totalRatings,
-        movie.currentStatus, movie.isAvailable];
+        movie.yearrelease, movie.totalratings,
+        movie.isavailable, movie.currentstatus];
     
     return db.query<MovieRow> (sql, params)
         .then(result => result.rows.map(row => Movie.from(row))[0]);
@@ -104,8 +104,8 @@ export function patchMovie(movie: Movie): Promise<Movie> {
         WHERE id = $7 RETURNING *`;
     
     const params = [movie.title, movie.genre,
-        movie.yearRelease, movie.totalRatings,
-        movie.currentStatus, movie.isAvailable];
+        movie.yearrelease, movie.totalratings,
+        movie.isavailable, movie.currentstatus];
     
     return db.query<MovieRow> (sql, params)
         .then(result => result.rows.map(row => Movie.from(row))[0]);

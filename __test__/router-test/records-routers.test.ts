@@ -214,10 +214,10 @@ describe(`'PATCH' Method /records` , () => {
             .mockImplementation( async () => ({}));
         
         const updatedRecord = {
-            id: 23,
+            id: 34,
             mediatitle: 'Journey To The West',
-            totalratings: 12,
             category: 2,
+            handler: 44,
             recommendation: 4
         };
 

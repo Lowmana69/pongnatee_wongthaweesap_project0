@@ -37,15 +37,16 @@ export function getRecordsByUser (handler: number): Promise<Record> {
 
 export function createNewRecord (record: any): Promise<Record> {
     const newRecord = new Record (
-        undefined, record.category,
-        record.handler, record.totalRatings,
+        undefined, record.mediatitle,
+        record.category, record.handler,
         record.recommendation
     );
     
-    const params = [record.category &&
-        record.handler && record.totalRatings &&
-        record.recommendation];
-
+    const params = (record.mediatitle,
+        record.category, record.handler,
+        record.recommendation);
+        
+console.log(newRecord);
     if (params) {
         return recordsDao.createNewRecord(newRecord);
     } else {
@@ -57,9 +58,9 @@ export function createNewRecord (record: any): Promise<Record> {
 
 export function patchRecord (input: any): Promise<Record> {
     const record = new Record (
-        input.id, input.category,
-        input.handler, input.recommendation,
-        input.totalRatings
+        input.id, input.mediatitle,
+        input.category, input.handler,
+        input.recommendation
     );
 
     if (!record.id) {

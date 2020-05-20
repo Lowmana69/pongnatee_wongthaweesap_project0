@@ -100,7 +100,7 @@ export function patchRecord(record: Record): Promise<Record> {
         recommendation = COALESCE($4, recommendation ) WHERE id = $5 RETURNING *`;
     
     const params = [record.mediatitle, record.category,
-        record.recommendation, record.handler];
+        record.handler, record.recommendation];
 
     return db.query<RecordRow> (sql, params)
         .then(result => result.rows.map(row => Record.from(row))[0]);

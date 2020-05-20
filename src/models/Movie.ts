@@ -3,11 +3,11 @@
 export class Movie {
     id:             number;
     title:          string;
-    yearRelease:    number;
+    yearrelease:    number;
     genre:          number;
-    totalRatings:   number;
-    isAvailable:    boolean;
-    currentStatus:  number;
+    totalratings:   number;
+    isavailable:    boolean;
+    currentstatus:  number;
 
     /**
      * Static function for creating a Person instance from the structure the
@@ -17,12 +17,12 @@ export class Movie {
     static from(obj: MovieRow): Movie {
         const movie = new Movie(
             obj.id,
-            obj.title, 
-            obj.yearRelease, 
+            obj.title,
+            obj.yearrelease,
             obj.genre,
-            obj.totalRatings,
-            obj.isAvailable,
-            obj.currentStatus
+            obj.totalratings,
+            obj.isavailable,
+            obj.currentstatus
         );
         return movie;
     }
@@ -30,19 +30,19 @@ export class Movie {
     constructor(
     id: number,
     title: string,
-    yearRelease: number,
+    yearrelease: number,
     genre: number,
-    totalRatings: number,
-    isAvailable: boolean,
-    currentStatus: number
+    totalratings: number,
+    isavailable: boolean,
+    currentstatus: number
     ) {
         this.id = id;
         this.title = title;
-        this.yearRelease = yearRelease;
+        this.yearrelease = yearrelease;
         this.genre = genre;
-        this.totalRatings = totalRatings;
-        this.isAvailable = isAvailable;
-        this.currentStatus = currentStatus;
+        this.totalratings = totalratings;
+        this.isavailable = isavailable;
+        this.currentstatus = currentstatus;
     }
 }
 
@@ -51,9 +51,9 @@ export class Movie {
 export interface MovieRow {
     id:             number;
     title:          string;
-    yearRelease:    number;
+    yearrelease:    number;
     genre:          number;
-    totalRatings:   number;
-    isAvailable:    boolean;
-    currentStatus:  number;
+    totalratings:   number;
+    isavailable:    boolean;
+    currentstatus:  number;
 }
